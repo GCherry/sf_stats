@@ -19,10 +19,10 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./sf_stats
+      working-directory: ./sf_stats.Api
     - name: Build
       run: dotnet build --no-restore
-      working-directory: ./sf_stats
+      working-directory: ./sf_stats.Api
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: ./sf_stats
+      working-directory: ./sf_stats.Api/sf_stats.Tests.NUnit
