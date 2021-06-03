@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\sf_stats.Domain\sf_stats.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
