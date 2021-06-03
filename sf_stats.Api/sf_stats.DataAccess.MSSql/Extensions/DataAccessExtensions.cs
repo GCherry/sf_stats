@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using sf_stats.DataAccess.MSSql.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace sf_stats.DataAccess.Extensions.MSSql
 {
@@ -7,7 +9,7 @@ namespace sf_stats.DataAccess.Extensions.MSSql
     {
         public static IServiceCollection RegisterDataServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddDbContext<Context>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SFStatDbContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             ////Repositories
             //services.AddTransient<IRepository, Repository>();
