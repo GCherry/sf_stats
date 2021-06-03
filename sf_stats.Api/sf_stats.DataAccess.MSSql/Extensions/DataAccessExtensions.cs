@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using sf_stats.DataAccess.MSSql.Context;
 using Microsoft.EntityFrameworkCore;
+using sf_stats.DataAccess.MSSql.Repositories;
+using sf_stats.DataAccess.MSSql.Interfaces;
 
 namespace sf_stats.DataAccess.Extensions.MSSql
 {
@@ -11,8 +13,8 @@ namespace sf_stats.DataAccess.Extensions.MSSql
         {
             services.AddDbContext<SFStatDbContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            ////Repositories
-            //services.AddTransient<IRepository, Repository>();
+            // Repositories
+            services.AddTransient<ILogRepository, LogRepository>();
 
             return services;
         }
