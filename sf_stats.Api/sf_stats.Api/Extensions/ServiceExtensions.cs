@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using sf_stats.Api.Interfaces;
+using sf_stats.Api.Services;
 
 namespace sf_stats.Api.Extensions
 {
@@ -11,6 +9,8 @@ namespace sf_stats.Api.Extensions
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<ILogService, LogService>();
+
             return services;
         }
     }
