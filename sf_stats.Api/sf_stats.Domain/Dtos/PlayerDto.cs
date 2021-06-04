@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sf_stats.Domain.Entities
+namespace sf_stats.Domain.Dtos
 {
     public class PlayerDto
     {

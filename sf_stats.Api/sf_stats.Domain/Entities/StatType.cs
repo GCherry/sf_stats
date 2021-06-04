@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sf_stats.Domain.Dtos
+namespace sf_stats.Domain.Entities
 {
-    public class DivisionDto
+    public class StatType
     {
         public int Id { get; set; }
         public string Code { get; set; }

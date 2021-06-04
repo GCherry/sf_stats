@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sf_stats.Domain.Dtos
+namespace sf_stats.Domain.Dtos 
 {
-    public class DivisionDto
+
+    public class StatTypeDto
     {
         public int Id { get; set; }
         public string Code { get; set; }

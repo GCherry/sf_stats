@@ -23,6 +23,7 @@ namespace sf_stats.DataAccess.MSSql.Context
                         .ApplyConfiguration(new SeasonEntityConfiguration())
                         .ApplyConfiguration(new DivisionEntityConfiguration())
                         .ApplyConfiguration(new TeamEntityConfiguration())
+                        .ApplyConfiguration(new StatTypeEntityConfiguration())
                         .ApplyConfiguration(new PlayerEntityConfiguration());
         }
     }

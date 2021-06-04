@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210604014353_primaryTables")]
+    [Migration("20210604020116_primaryTables")]
     partial class primaryTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,6 +129,28 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Season");
+                });
+
+            modelBuilder.Entity("sf_stats.Domain.Entities.StatType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StatType");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.Team", b =>
