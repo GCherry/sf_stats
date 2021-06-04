@@ -13,5 +13,7 @@ namespace sf_stats.Domain.Entities
         public string DisplayName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        public virtual List<Game> Games { get; set; }
     }
 }

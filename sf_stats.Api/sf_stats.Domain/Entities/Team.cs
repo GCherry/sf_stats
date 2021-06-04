@@ -12,5 +12,8 @@ namespace sf_stats.Domain.Entities
         public string Name { get; set; }
         public string NameAbbreviation { get; set; }
         public bool IsActive { get; set; }
+
+        public virtual List<Game> HomeGames { get; set; }
+        public virtual List<Game> AwayGames { get; set; }
     }
 }
