@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sf_stats.DataAccess.MSSql.Context;
 
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    partial class SFStatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210604034832_primaryTables")]
+    partial class primaryTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
