@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210604032156_primaryTables")]
+    [Migration("20210604034832_primaryTables")]
     partial class primaryTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,6 +134,12 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 

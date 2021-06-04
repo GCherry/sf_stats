@@ -21,6 +21,14 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
                 .IsRequired()
                 .HasColumnType("nvarchar(max)");
 
+            builder.Property(x => x.StartDate)
+                .IsRequired()
+                .HasColumnType("date");
+
+            builder.Property(x => x.EndDate)
+                .IsRequired()
+                .HasColumnType("date");
+
             builder.ToTable("Season");
         }
     }

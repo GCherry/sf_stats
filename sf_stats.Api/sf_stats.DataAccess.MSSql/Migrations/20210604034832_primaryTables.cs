@@ -50,7 +50,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "date", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {

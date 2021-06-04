@@ -133,6 +133,12 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("date");
+
                     b.HasKey("Id");
 
                     b.ToTable("Season");
