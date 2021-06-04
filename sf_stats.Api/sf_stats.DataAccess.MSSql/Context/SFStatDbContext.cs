@@ -19,7 +19,11 @@ namespace sf_stats.DataAccess.MSSql.Context
         {
             modelBuilder.HasDefaultSchema("dbo");
 
-            modelBuilder.ApplyConfiguration(new LogEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new LogEntityConfiguration())
+                        .ApplyConfiguration(new SeasonEntityConfiguration())
+                        .ApplyConfiguration(new DivisionEntityConfiguration())
+                        .ApplyConfiguration(new TeamEntityConfiguration())
+                        .ApplyConfiguration(new PlayerEntityConfiguration());
         }
     }
 }
