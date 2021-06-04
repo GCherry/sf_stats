@@ -28,6 +28,17 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
                 .IsRequired()
                 .HasColumnType("date");
 
+            builder.Property(x => x.Height)
+                .IsRequired()
+                .HasColumnType("tinyint");
+
+            builder.Property(x => x.Weight)
+                .IsRequired()
+                .HasColumnType("smallint");
+
+            builder.Property(x => x.Grade)
+                .HasColumnType("varchar(50)");
+
             builder.ToTable("Player");
         }
     }

@@ -13,5 +13,8 @@ namespace sf_stats.Domain.Dtos
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public int Height { get; set; }
+        public int Weight { get; set; }
+        public string Grade { get; set; }
     }
 }

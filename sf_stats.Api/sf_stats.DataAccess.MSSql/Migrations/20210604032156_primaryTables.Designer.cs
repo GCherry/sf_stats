@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210604024633_primaryTables")]
+    [Migration("20210604032156_primaryTables")]
     partial class primaryTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,12 +97,21 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Grade")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<byte>("Height")
+                        .HasColumnType("tinyint");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<short>("Weight")
+                        .HasColumnType("smallint");
 
                     b.HasKey("Id");
 

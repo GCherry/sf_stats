@@ -95,12 +95,21 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Grade")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<byte>("Height")
+                        .HasColumnType("tinyint");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<short>("Weight")
+                        .HasColumnType("smallint");
 
                     b.HasKey("Id");
 

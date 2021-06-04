@@ -32,7 +32,10 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "date", nullable: false)
+                    DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
+                    Height = table.Column<byte>(type: "tinyint", nullable: false),
+                    Weight = table.Column<short>(type: "smallint", nullable: false),
+                    Grade = table.Column<string>(type: "varchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
