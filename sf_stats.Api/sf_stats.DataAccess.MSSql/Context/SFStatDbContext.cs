@@ -14,6 +14,11 @@ namespace sf_stats.DataAccess.MSSql.Context
         public SFStatDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Log> Log { get; set; }
+        public DbSet<Season> Seasons { get; set; }
+        public DbSet<Division> Divisions { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<StatType> StatTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
