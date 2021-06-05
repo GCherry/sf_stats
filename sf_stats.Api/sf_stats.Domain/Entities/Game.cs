@@ -6,17 +6,9 @@ namespace sf_stats.Domain.Entities
     public class Game
     {
         public int Id { get; set; }
-
-        [ForeignKey("Season")]
         public int SeasonId { get; set; }
-
-        [ForeignKey("Division")]
         public int DivisionId { get; set; }
-
-        [ForeignKey("Team")]
         public int Home_TeamId { get; set; }
-
-        [ForeignKey("Team")]
         public int Away_TeamId { get; set; }
 
         public virtual Season Season { get; set; }

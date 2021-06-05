@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210604204659_addGameTable")]
+    [Migration("20210605052508_addGameTable")]
     partial class addGameTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
