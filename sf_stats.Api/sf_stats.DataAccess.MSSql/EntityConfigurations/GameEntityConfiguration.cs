@@ -36,6 +36,16 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
                 .IsRequired()
                 .HasColumnType("int");
 
+            builder.Property(x => x.GameDate)
+                .IsRequired()
+                .HasColumnType("datetime");
+
+            builder.Property(x => x.Home_Score)
+                .HasColumnType("int");
+
+            builder.Property(x => x.Away_Score)
+                .HasColumnType("int");
+
             builder.ToTable("Game");
         }
     }

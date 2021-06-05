@@ -42,40 +42,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.ToTable("Division");
                 });
 
-            modelBuilder.Entity("sf_stats.Domain.Entities.Game", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Away_TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DivisionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Home_TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeasonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Away_TeamId");
-
-                    b.HasIndex("DivisionId");
-
-                    b.HasIndex("Home_TeamId");
-
-                    b.HasIndex("SeasonId");
-
-                    b.ToTable("Game");
-                });
-
             modelBuilder.Entity("sf_stats.Domain.Entities.Log", b =>
                 {
                     b.Property<int>("Id")
@@ -223,58 +189,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Team");
-                });
-
-            modelBuilder.Entity("sf_stats.Domain.Entities.Game", b =>
-                {
-                    b.HasOne("sf_stats.Domain.Entities.Team", "Away_Team")
-                        .WithMany("AwayGames")
-                        .HasForeignKey("Away_TeamId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("sf_stats.Domain.Entities.Division", "Division")
-                        .WithMany("Games")
-                        .HasForeignKey("DivisionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("sf_stats.Domain.Entities.Team", "Home_Team")
-                        .WithMany("HomeGames")
-                        .HasForeignKey("Home_TeamId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("sf_stats.Domain.Entities.Season", "Season")
-                        .WithMany("Games")
-                        .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Away_Team");
-
-                    b.Navigation("Division");
-
-                    b.Navigation("Home_Team");
-
-                    b.Navigation("Season");
-                });
-
-            modelBuilder.Entity("sf_stats.Domain.Entities.Division", b =>
-                {
-                    b.Navigation("Games");
-                });
-
-            modelBuilder.Entity("sf_stats.Domain.Entities.Season", b =>
-                {
-                    b.Navigation("Games");
-                });
-
-            modelBuilder.Entity("sf_stats.Domain.Entities.Team", b =>
-                {
-                    b.Navigation("AwayGames");
-
-                    b.Navigation("HomeGames");
                 });
 #pragma warning restore 612, 618
         }

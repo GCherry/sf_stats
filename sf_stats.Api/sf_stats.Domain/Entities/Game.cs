@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace sf_stats.Domain.Entities
 {
@@ -10,6 +9,9 @@ namespace sf_stats.Domain.Entities
         public int DivisionId { get; set; }
         public int Home_TeamId { get; set; }
         public int Away_TeamId { get; set; }
+        public DateTime GameDate { get; set; }
+        public int? Home_Score { get; set; }
+        public int? Away_Score { get; set; }
 
         public virtual Season Season { get; set; }
         public virtual Division Division { get; set; }

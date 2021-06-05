@@ -1,10 +1,5 @@
 ﻿using sf_stats.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sf_stats.Domain.Dtos
 {
@@ -15,6 +10,9 @@ namespace sf_stats.Domain.Dtos
         public int DivisionId { get; set; }
         public int Home_TeamId { get; set; }
         public int Away_TeamId { get; set; }
+        public DateTime GameDate { get; set; }
+        public int? Home_Score { get; set; }
+        public int? Away_Score { get; set; }
 
         public virtual Season Season { get; set; }
         public virtual Division Division { get; set; }
