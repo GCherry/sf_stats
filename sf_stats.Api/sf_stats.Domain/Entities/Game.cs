@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace sf_stats.Domain.Entities
 {
@@ -17,5 +18,6 @@ namespace sf_stats.Domain.Entities
         public virtual Division Division { get; set; }
         public virtual Team Home_Team { get; set; }
         public virtual Team Away_Team { get; set; }
+        public virtual List<PlayerStat> PlayerStats { get; set; } 
     }
 }

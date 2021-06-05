@@ -16,5 +16,7 @@ namespace sf_stats.Domain.Entities
         public int Height { get; set; }
         public int Weight { get; set; }
         public string Grade { get; set; }
+
+        public virtual List<PlayerStat> PlayerStats { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace sf_stats.DataAccess.MSSql.Context
         public DbSet<Player> Players { get; set; }
         public DbSet<StatType> StatTypes { get; set; }
         public DbSet<Game> Games { get; set; }
+        public DbSet<PlayerStat> PlayerStats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,7 +32,8 @@ namespace sf_stats.DataAccess.MSSql.Context
                         .ApplyConfiguration(new TeamEntityConfiguration())
                         .ApplyConfiguration(new StatTypeEntityConfiguration())
                         .ApplyConfiguration(new PlayerEntityConfiguration())
-                        .ApplyConfiguration(new GameEntityConfiguration());
+                        .ApplyConfiguration(new GameEntityConfiguration())
+                        .ApplyConfiguration(new PlayerStatEntityConfiguration());
         }
     }
 }
