@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace sf_stats.Domain.Entities
+﻿namespace sf_stats.Domain.Entities
 {
     public class PlayerStat
     {
@@ -15,8 +9,8 @@ namespace sf_stats.Domain.Entities
         // Unsure what the ideal value here is
         public decimal Value { get; set; }
 
-        public virtual StatType StatType { get; set; }
         public virtual Player Player { get; set; }
         public virtual Game Game { get; set; }
+        public virtual StatType StatType { get; set; }
     }
 }

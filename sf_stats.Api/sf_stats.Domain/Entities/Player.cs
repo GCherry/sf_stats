@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sf_stats.Domain.Entities
 {
@@ -18,5 +15,8 @@ namespace sf_stats.Domain.Entities
         public string Grade { get; set; }
 
         public virtual List<PlayerStat> PlayerStats { get; set; }
+
+        //Feels like this should be a list of TeamSeasons
+        public virtual List<TeamSeasonPlayer> TeamSeasonPlayers { get; set; }
     }
 }

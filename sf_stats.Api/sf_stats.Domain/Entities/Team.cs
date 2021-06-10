@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace sf_stats.Domain.Entities
 {
@@ -13,7 +9,6 @@ namespace sf_stats.Domain.Entities
         public string NameAbbreviation { get; set; }
         public bool IsActive { get; set; }
 
-        public virtual List<Game> HomeGames { get; set; }
-        public virtual List<Game> AwayGames { get; set; }
+        public virtual List<TeamSeason> TeamSeasons { get; set; }
     }
 }
