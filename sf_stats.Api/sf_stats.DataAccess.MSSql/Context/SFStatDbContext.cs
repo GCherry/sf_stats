@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Context
@@ -30,6 +31,38 @@ namespace sf_stats.DataAccess.MSSql.Context
                         .ApplyConfiguration(new TeamEntityConfiguration())
                         .ApplyConfiguration(new StatTypeEntityConfiguration())
                         .ApplyConfiguration(new PlayerEntityConfiguration());
+        }
+
+        public override int SaveChanges()
+        {
+            UpdateCreateDate();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            UpdateCreateDate();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void UpdateCreateDate()
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is DbEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((DbEntity)entityEntry.Entity).CreatedDate = DateTimeOffset.Now;
+                }
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((DbEntity)entityEntry.Entity).LastModifiedDate = DateTimeOffset.Now;
+                }
+            }
         }
     }
 }

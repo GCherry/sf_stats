@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.Domain.Entities
 {
-    public class Team
+    public class Team : DbEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
