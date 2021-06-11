@@ -69,6 +69,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Away_TeamSeasonTeamId")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("DivisionId")
                         .HasColumnType("int");
 
@@ -86,6 +89,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
                     b.Property<int>("Home_TeamSeasonTeamId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -187,8 +193,14 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
@@ -311,6 +323,12 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("SeasonId")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.HasKey("TeamId", "SeasonId");
 
                     b.HasIndex("SeasonId");
@@ -325,6 +343,12 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("TeamSeasonSeasonId")
                         .HasColumnType("int");

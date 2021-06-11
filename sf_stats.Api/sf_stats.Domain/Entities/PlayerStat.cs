@@ -1,6 +1,6 @@
 ﻿namespace sf_stats.Domain.Entities
 {
-    public class PlayerStat
+    public class PlayerStat : DbEntity
     {
         public int Id { get; set; }
         public int PlayerId { get; set; }

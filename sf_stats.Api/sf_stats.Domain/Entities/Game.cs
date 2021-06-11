@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace sf_stats.Domain.Entities
 {
-    public class Game
+    public class Game : DbEntity
     {
         public int Id { get; set; }
         public int DivisionId { get; set; }

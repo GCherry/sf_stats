@@ -2,7 +2,7 @@
 
 namespace sf_stats.Domain.Entities
 {
-    public class TeamSeason
+    public class TeamSeason : DbEntity
     {
         public int TeamId { get; set; }
         public int SeasonId { get; set; }

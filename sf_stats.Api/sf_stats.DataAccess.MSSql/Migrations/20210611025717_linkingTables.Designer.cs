@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210610044217_linkingTables")]
+    [Migration("20210611025717_linkingTables")]
     partial class linkingTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,9 +35,15 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -65,6 +71,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Away_TeamSeasonTeamId")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("DivisionId")
                         .HasColumnType("int");
 
@@ -82,6 +91,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
                     b.Property<int>("Home_TeamSeasonTeamId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -140,6 +152,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("date");
 
@@ -152,6 +167,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
                     b.Property<byte>("Height")
                         .HasColumnType("tinyint");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -177,8 +195,14 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
@@ -213,12 +237,18 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("date");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
@@ -241,9 +271,15 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -259,8 +295,14 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -283,6 +325,12 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("SeasonId")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.HasKey("TeamId", "SeasonId");
 
                     b.HasIndex("SeasonId");
@@ -297,6 +345,12 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("TeamSeasonSeasonId")
                         .HasColumnType("int");

@@ -1,6 +1,6 @@
 ﻿namespace sf_stats.Domain.Entities
 {
-    public class TeamSeasonPlayer
+    public class TeamSeasonPlayer : DbEntity
     {
         public int TeamSeasonId { get; set; }
         public int PlayerId { get; set; }
