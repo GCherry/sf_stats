@@ -61,7 +61,7 @@ namespace sf_stats.DataAccess.MSSql.Repositories
 
         private static Expression<Func<Season, bool>> CheckDates(DateTimeOffset? startDate, DateTimeOffset? endDate)
         {
-            bool bothDatesNull = !startDate.HasValue && endDate.HasValue;
+            bool bothDatesNull = !startDate.HasValue && !endDate.HasValue;
             bool justStartDate = startDate.HasValue && !endDate.HasValue;
             bool justEndDate = !startDate.HasValue && !endDate.HasValue;
 
