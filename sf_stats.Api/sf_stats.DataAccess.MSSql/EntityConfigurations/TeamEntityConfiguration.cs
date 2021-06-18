@@ -18,7 +18,8 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
 
             builder.Property(x => x.IsActive)
                 .IsRequired()
-                .HasColumnType("bit");
+                .HasColumnType("bit")
+                .HasDefaultValue(1);
 
             builder.ToTable("Team");
         }

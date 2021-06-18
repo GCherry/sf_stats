@@ -21,7 +21,7 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
                 .HasColumnType("datetimeoffset");
 
             builder.Property(x => x.LastModifiedDate)
-                .HasColumnType("datetimeoffset");
+                .HasColumnType("datetimeoffset"); 
         }
     }
 }

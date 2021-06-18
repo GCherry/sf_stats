@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210618053909_addLinkingTables")]
+    [Migration("20210618064131_addLinkingTables")]
     partial class addLinkingTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -275,7 +275,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<DateTimeOffset>("LastModifiedDate")
                         .HasColumnType("datetimeoffset");
@@ -354,7 +356,7 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Away_TeamSeason")
                         .WithMany("AwayGames")
                         .HasForeignKey("Away_TeamSeasonId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("sf_stats.Domain.Entities.Division", "Division")
@@ -366,7 +368,7 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Home_TeamSeason")
                         .WithMany("HomeGames")
                         .HasForeignKey("Home_TeamSeasonId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Away_TeamSeason");

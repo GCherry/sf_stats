@@ -7,6 +7,16 @@ namespace sf_stats.DataAccess.MSSql.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<bool>(
+                name: "IsActive",
+                schema: "dbo",
+                table: "Team",
+                type: "bit",
+                nullable: false,
+                defaultValue: true,
+                oldClrType: typeof(bool),
+                oldType: "bit");
+
             migrationBuilder.CreateTable(
                 name: "TeamSeason",
                 schema: "dbo",
@@ -69,13 +79,15 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         column: x => x.Away_TeamSeasonId,
                         principalSchema: "dbo",
                         principalTable: "TeamSeason",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Game_TeamSeason_Home_TeamSeasonId",
                         column: x => x.Home_TeamSeasonId,
                         principalSchema: "dbo",
                         principalTable: "TeamSeason",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,6 +239,16 @@ namespace sf_stats.DataAccess.MSSql.Migrations
             migrationBuilder.DropTable(
                 name: "TeamSeason",
                 schema: "dbo");
+
+            migrationBuilder.AlterColumn<bool>(
+                name: "IsActive",
+                schema: "dbo",
+                table: "Team",
+                type: "bit",
+                nullable: false,
+                oldClrType: typeof(bool),
+                oldType: "bit",
+                oldDefaultValue: true);
         }
     }
 }

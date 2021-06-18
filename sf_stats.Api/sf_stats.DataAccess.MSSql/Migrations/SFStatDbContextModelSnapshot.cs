@@ -273,7 +273,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<DateTimeOffset>("LastModifiedDate")
                         .HasColumnType("datetimeoffset");
@@ -352,7 +354,7 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Away_TeamSeason")
                         .WithMany("AwayGames")
                         .HasForeignKey("Away_TeamSeasonId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("sf_stats.Domain.Entities.Division", "Division")
@@ -364,7 +366,7 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Home_TeamSeason")
                         .WithMany("HomeGames")
                         .HasForeignKey("Home_TeamSeasonId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Away_TeamSeason");
