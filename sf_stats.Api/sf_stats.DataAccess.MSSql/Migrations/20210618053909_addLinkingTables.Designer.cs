@@ -10,8 +10,8 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210611025717_linkingTables")]
-    partial class linkingTables
+    [Migration("20210618053909_addLinkingTables")]
+    partial class addLinkingTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,8 +27,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
@@ -55,20 +53,12 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("Away_Score")
                         .HasColumnType("int");
 
                     b.Property<int>("Away_TeamSeasonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Away_TeamSeasonSeasonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Away_TeamSeasonTeamId")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("CreatedDate")
@@ -86,22 +76,16 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Home_TeamSeasonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Home_TeamSeasonSeasonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Home_TeamSeasonTeamId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("LastModifiedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Away_TeamSeasonId");
+
                     b.HasIndex("DivisionId");
 
-                    b.HasIndex("Away_TeamSeasonTeamId", "Away_TeamSeasonSeasonId");
-
-                    b.HasIndex("Home_TeamSeasonTeamId", "Home_TeamSeasonSeasonId");
+                    b.HasIndex("Home_TeamSeasonId");
 
                     b.ToTable("Game");
                 });
@@ -148,8 +132,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTimeOffset>("CreatedDate")
@@ -204,10 +186,10 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<DateTimeOffset>("LastModifiedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("PlayerId")
+                    b.Property<int>("StatTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StatTypeId")
+                    b.Property<int>("TeamSeasonPlayerId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Value")
@@ -217,9 +199,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.HasIndex("PlayerId");
-
                     b.HasIndex("StatTypeId");
+
+                    b.HasIndex("TeamSeasonPlayerId");
 
                     b.ToTable("PlayerStat");
                 });
@@ -229,8 +211,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
@@ -263,8 +243,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
@@ -291,8 +269,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTimeOffset>("CreatedDate")
@@ -319,11 +295,10 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
             modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeason", b =>
                 {
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeasonId")
-                        .HasColumnType("int");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
@@ -331,20 +306,27 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<DateTimeOffset>("LastModifiedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.HasKey("TeamId", "SeasonId");
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("SeasonId");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("TeamSeason");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeasonPlayer", b =>
                 {
-                    b.Property<int>("TeamSeasonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("int");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
@@ -352,38 +334,38 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<DateTimeOffset>("LastModifiedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("TeamSeasonSeasonId")
+                    b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeamSeasonTeamId")
+                    b.Property<int>("TeamSeasonId")
                         .HasColumnType("int");
 
-                    b.HasKey("TeamSeasonId", "PlayerId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PlayerId");
 
-                    b.HasIndex("TeamSeasonTeamId", "TeamSeasonSeasonId");
+                    b.HasIndex("TeamSeasonId");
 
                     b.ToTable("TeamSeasonPlayer");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.Game", b =>
                 {
+                    b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Away_TeamSeason")
+                        .WithMany("AwayGames")
+                        .HasForeignKey("Away_TeamSeasonId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("sf_stats.Domain.Entities.Division", "Division")
                         .WithMany("Games")
                         .HasForeignKey("DivisionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Away_TeamSeason")
-                        .WithMany("AwayGames")
-                        .HasForeignKey("Away_TeamSeasonTeamId", "Away_TeamSeasonSeasonId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Home_TeamSeason")
                         .WithMany("HomeGames")
-                        .HasForeignKey("Home_TeamSeasonTeamId", "Home_TeamSeasonSeasonId")
+                        .HasForeignKey("Home_TeamSeasonId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -402,23 +384,23 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("sf_stats.Domain.Entities.Player", "Player")
-                        .WithMany("PlayerStats")
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("sf_stats.Domain.Entities.StatType", "StatType")
                         .WithMany("PlayerStats")
                         .HasForeignKey("StatTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("sf_stats.Domain.Entities.TeamSeasonPlayer", "TeamSeasonPlayer")
+                        .WithMany("PlayerStats")
+                        .HasForeignKey("TeamSeasonPlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Game");
 
-                    b.Navigation("Player");
-
                     b.Navigation("StatType");
+
+                    b.Navigation("TeamSeasonPlayer");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeason", b =>
@@ -450,7 +432,7 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
                     b.HasOne("sf_stats.Domain.Entities.TeamSeason", "TeamSeason")
                         .WithMany("TeamSeasonPlayers")
-                        .HasForeignKey("TeamSeasonTeamId", "TeamSeasonSeasonId")
+                        .HasForeignKey("TeamSeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -471,8 +453,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
             modelBuilder.Entity("sf_stats.Domain.Entities.Player", b =>
                 {
-                    b.Navigation("PlayerStats");
-
                     b.Navigation("TeamSeasonPlayers");
                 });
 
@@ -498,6 +478,11 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Navigation("HomeGames");
 
                     b.Navigation("TeamSeasonPlayers");
+                });
+
+            modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeasonPlayer", b =>
+                {
+                    b.Navigation("PlayerStats");
                 });
 #pragma warning restore 612, 618
         }

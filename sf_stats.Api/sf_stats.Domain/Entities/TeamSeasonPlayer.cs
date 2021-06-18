@@ -1,4 +1,6 @@
-﻿namespace sf_stats.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace sf_stats.Domain.Entities
 {
     public class TeamSeasonPlayer : DbEntity
     {
@@ -7,5 +9,6 @@
 
         public virtual TeamSeason TeamSeason { get; set; }
         public virtual Player Player { get; set; }
+        public virtual List<PlayerStat> PlayerStats { get; set; }
     }
 }

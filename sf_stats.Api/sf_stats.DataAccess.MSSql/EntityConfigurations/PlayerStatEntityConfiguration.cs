@@ -8,8 +8,7 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<PlayerStat> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Player).WithMany(x => x.PlayerStats);
+            builder.HasOne(x => x.TeamSeasonPlayer).WithMany(x => x.PlayerStats);
             builder.HasOne(x => x.Game).WithMany(x => x.PlayerStats);
             builder.HasOne(x => x.StatType).WithMany(x => x.PlayerStats);
 
@@ -21,7 +20,7 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
                 .IsRequired()
                 .HasColumnType("int");
 
-            builder.Property(x => x.PlayerId)
+            builder.Property(x => x.TeamSeasonPlayerId)
                 .IsRequired()
                 .HasColumnType("int");
 

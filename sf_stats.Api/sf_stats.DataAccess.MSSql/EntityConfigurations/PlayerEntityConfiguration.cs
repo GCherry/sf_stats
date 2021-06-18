@@ -8,11 +8,6 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Player> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id)
-                .UseIdentityColumn()
-                .ValueGeneratedOnAdd();
-
             builder.Property(x => x.FirstName)
                 .IsRequired()
                 .HasColumnType("nvarchar(max)");

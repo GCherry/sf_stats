@@ -10,7 +10,6 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
         {
             builder.HasOne(x => x.Team).WithMany(x => x.TeamSeasons);
             builder.HasOne(x => x.Season).WithMany(x => x.TeamSeasons);
-            builder.HasKey(x => new {x.TeamId, x.SeasonId });
 
             builder.Property(x => x.TeamId)
                 .IsRequired()

@@ -5,7 +5,6 @@ namespace sf_stats.Domain.Entities
 {
     public class Game : DbEntity
     {
-        public int Id { get; set; }
         public int DivisionId { get; set; }
         public int Home_TeamSeasonId { get; set; }
         public int Away_TeamSeasonId { get; set; }
