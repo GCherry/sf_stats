@@ -9,8 +9,7 @@ namespace sf_stats.Domain.Entities
 
         public virtual Team Team { get; set; }
         public virtual Season Season { get; set; }
-        public virtual List<Game> HomeGames { get; set; }
-        public virtual List<Game> AwayGames { get; set; }
+        public virtual List<TeamSeasonGame> TeamSeasonGames { get; set; }
         public virtual List<TeamSeasonPlayer> TeamSeasonPlayers { get; set; }
     }
 }

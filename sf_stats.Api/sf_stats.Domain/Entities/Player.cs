@@ -13,8 +13,6 @@ namespace sf_stats.Domain.Entities
         public int Weight { get; set; }
         public string Grade { get; set; }
 
-
-        //Feels like this should be a list of TeamSeasons
         public virtual List<TeamSeasonPlayer> TeamSeasonPlayers { get; set; }
     }
 }

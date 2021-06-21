@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210618064131_addLinkingTables")]
+    [Migration("20210621182130_addLinkingTables")]
     partial class addLinkingTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,14 +58,8 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int?>("Away_Score")
                         .HasColumnType("int");
 
-                    b.Property<int>("Away_TeamSeasonId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("DivisionId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("GameDate")
                         .HasColumnType("datetime");
@@ -73,19 +67,10 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Property<int?>("Home_Score")
                         .HasColumnType("int");
 
-                    b.Property<int>("Home_TeamSeasonId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("LastModifiedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Away_TeamSeasonId");
-
-                    b.HasIndex("DivisionId");
-
-                    b.HasIndex("Home_TeamSeasonId");
 
                     b.ToTable("Game");
                 });
@@ -224,6 +209,9 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DivisionId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("date");
 
@@ -234,6 +222,8 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DivisionId");
 
                     b.ToTable("Season");
                 });
@@ -323,6 +313,37 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.ToTable("TeamSeason");
                 });
 
+            modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeasonGame", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsHomeTeam")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("TeamSeasonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("TeamSeasonId");
+
+                    b.ToTable("TeamSeasonGame");
+                });
+
             modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeasonPlayer", b =>
                 {
                     b.Property<int>("Id")
@@ -349,33 +370,6 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.HasIndex("TeamSeasonId");
 
                     b.ToTable("TeamSeasonPlayer");
-                });
-
-            modelBuilder.Entity("sf_stats.Domain.Entities.Game", b =>
-                {
-                    b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Away_TeamSeason")
-                        .WithMany("AwayGames")
-                        .HasForeignKey("Away_TeamSeasonId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("sf_stats.Domain.Entities.Division", "Division")
-                        .WithMany("Games")
-                        .HasForeignKey("DivisionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("sf_stats.Domain.Entities.TeamSeason", "Home_TeamSeason")
-                        .WithMany("HomeGames")
-                        .HasForeignKey("Home_TeamSeasonId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.Navigation("Away_TeamSeason");
-
-                    b.Navigation("Division");
-
-                    b.Navigation("Home_TeamSeason");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.PlayerStat", b =>
@@ -405,6 +399,17 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Navigation("TeamSeasonPlayer");
                 });
 
+            modelBuilder.Entity("sf_stats.Domain.Entities.Season", b =>
+                {
+                    b.HasOne("sf_stats.Domain.Entities.Division", "Division")
+                        .WithMany("Seasons")
+                        .HasForeignKey("DivisionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Division");
+                });
+
             modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeason", b =>
                 {
                     b.HasOne("sf_stats.Domain.Entities.Season", "Season")
@@ -422,6 +427,25 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                     b.Navigation("Season");
 
                     b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeasonGame", b =>
+                {
+                    b.HasOne("sf_stats.Domain.Entities.Game", "Game")
+                        .WithMany("TeamSeasonGames")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("sf_stats.Domain.Entities.TeamSeason", "TeamSeason")
+                        .WithMany("TeamSeasonGames")
+                        .HasForeignKey("TeamSeasonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("TeamSeason");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeasonPlayer", b =>
@@ -445,12 +469,14 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
             modelBuilder.Entity("sf_stats.Domain.Entities.Division", b =>
                 {
-                    b.Navigation("Games");
+                    b.Navigation("Seasons");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.Game", b =>
                 {
                     b.Navigation("PlayerStats");
+
+                    b.Navigation("TeamSeasonGames");
                 });
 
             modelBuilder.Entity("sf_stats.Domain.Entities.Player", b =>
@@ -475,9 +501,7 @@ namespace sf_stats.DataAccess.MSSql.Migrations
 
             modelBuilder.Entity("sf_stats.Domain.Entities.TeamSeason", b =>
                 {
-                    b.Navigation("AwayGames");
-
-                    b.Navigation("HomeGames");
+                    b.Navigation("TeamSeasonGames");
 
                     b.Navigation("TeamSeasonPlayers");
                 });

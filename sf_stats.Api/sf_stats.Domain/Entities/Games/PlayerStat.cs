@@ -2,7 +2,6 @@
 {
     public class PlayerStat : DbEntity
     {
-        public int Id { get; set; }
         public int TeamSeasonPlayerId { get; set; }
         public int GameId { get; set; }
         public int StatTypeId { get; set; }

@@ -17,6 +17,32 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                 oldClrType: typeof(bool),
                 oldType: "bit");
 
+            migrationBuilder.AddColumn<int>(
+                name: "DivisionId",
+                schema: "dbo",
+                table: "Season",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.CreateTable(
+                name: "Game",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GameDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Home_Score = table.Column<int>(type: "int", nullable: true),
+                    Away_Score = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Game", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "TeamSeason",
                 schema: "dbo",
@@ -49,45 +75,35 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Game",
+                name: "TeamSeasonGame",
                 schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DivisionId = table.Column<int>(type: "int", nullable: false),
-                    Home_TeamSeasonId = table.Column<int>(type: "int", nullable: false),
-                    Away_TeamSeasonId = table.Column<int>(type: "int", nullable: false),
-                    GameDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Home_Score = table.Column<int>(type: "int", nullable: true),
-                    Away_Score = table.Column<int>(type: "int", nullable: true),
+                    GameId = table.Column<int>(type: "int", nullable: false),
+                    TeamSeasonId = table.Column<int>(type: "int", nullable: false),
+                    IsHomeTeam = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     LastModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Game", x => x.Id);
+                    table.PrimaryKey("PK_TeamSeasonGame", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Game_Division_DivisionId",
-                        column: x => x.DivisionId,
+                        name: "FK_TeamSeasonGame_Game_GameId",
+                        column: x => x.GameId,
                         principalSchema: "dbo",
-                        principalTable: "Division",
+                        principalTable: "Game",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Game_TeamSeason_Away_TeamSeasonId",
-                        column: x => x.Away_TeamSeasonId,
+                        name: "FK_TeamSeasonGame_TeamSeason_TeamSeasonId",
+                        column: x => x.TeamSeasonId,
                         principalSchema: "dbo",
                         principalTable: "TeamSeason",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Game_TeamSeason_Home_TeamSeasonId",
-                        column: x => x.Home_TeamSeasonId,
-                        principalSchema: "dbo",
-                        principalTable: "TeamSeason",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,22 +178,10 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Game_Away_TeamSeasonId",
+                name: "IX_Season_DivisionId",
                 schema: "dbo",
-                table: "Game",
-                column: "Away_TeamSeasonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Game_DivisionId",
-                schema: "dbo",
-                table: "Game",
+                table: "Season",
                 column: "DivisionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Game_Home_TeamSeasonId",
-                schema: "dbo",
-                table: "Game",
-                column: "Home_TeamSeasonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerStat_GameId",
@@ -210,6 +214,18 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TeamSeasonGame_GameId",
+                schema: "dbo",
+                table: "TeamSeasonGame",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamSeasonGame_TeamSeasonId",
+                schema: "dbo",
+                table: "TeamSeasonGame",
+                column: "TeamSeasonId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TeamSeasonPlayer_PlayerId",
                 schema: "dbo",
                 table: "TeamSeasonPlayer",
@@ -220,16 +236,31 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                 schema: "dbo",
                 table: "TeamSeasonPlayer",
                 column: "TeamSeasonId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Season_Division_DivisionId",
+                schema: "dbo",
+                table: "Season",
+                column: "DivisionId",
+                principalSchema: "dbo",
+                principalTable: "Division",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Season_Division_DivisionId",
+                schema: "dbo",
+                table: "Season");
+
             migrationBuilder.DropTable(
                 name: "PlayerStat",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Game",
+                name: "TeamSeasonGame",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -237,8 +268,22 @@ namespace sf_stats.DataAccess.MSSql.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
+                name: "Game",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "TeamSeason",
                 schema: "dbo");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Season_DivisionId",
+                schema: "dbo",
+                table: "Season");
+
+            migrationBuilder.DropColumn(
+                name: "DivisionId",
+                schema: "dbo",
+                table: "Season");
 
             migrationBuilder.AlterColumn<bool>(
                 name: "IsActive",
