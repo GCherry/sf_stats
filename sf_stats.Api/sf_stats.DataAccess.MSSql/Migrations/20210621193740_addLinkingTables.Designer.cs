@@ -10,7 +10,7 @@ using sf_stats.DataAccess.MSSql.Context;
 namespace sf_stats.DataAccess.MSSql.Migrations
 {
     [DbContext(typeof(SFStatDbContext))]
-    [Migration("20210621182130_addLinkingTables")]
+    [Migration("20210621193740_addLinkingTables")]
     partial class addLinkingTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

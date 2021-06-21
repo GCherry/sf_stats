@@ -15,30 +15,32 @@ namespace sf_stats.DataAccess.MSSql.Context
         public SFStatDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Log> Log { get; set; }
-        public DbSet<Season> Seasons { get; set; }
         public DbSet<Division> Divisions { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
-        public DbSet<StatType> StatTypes { get; set; }
-        public DbSet<Game> Games { get; set; }
-        public DbSet<PlayerStat> PlayerStats { get; set; }
+        public DbSet<Season> Seasons { get; set; }
         public DbSet<TeamSeason> TeamSeasons { get; set; }
         public DbSet<TeamSeasonPlayer> TeamSeasonPlayers { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<TeamSeasonGame> TeamSeasonGames { get; set; }
+        public DbSet<PlayerStat> PlayerStats { get; set; }
+        public DbSet<StatType> StatTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("dbo");
 
             modelBuilder.ApplyConfiguration(new LogEntityConfiguration())
-                        .ApplyConfiguration(new SeasonEntityConfiguration())
                         .ApplyConfiguration(new DivisionEntityConfiguration())
                         .ApplyConfiguration(new TeamEntityConfiguration())
-                        .ApplyConfiguration(new StatTypeEntityConfiguration())
                         .ApplyConfiguration(new PlayerEntityConfiguration())
+                        .ApplyConfiguration(new SeasonEntityConfiguration())
+                        .ApplyConfiguration(new TeamSeasonEntityConfiguration())
+                        .ApplyConfiguration(new TeamSeasonPlayerEntityConfiguration())
                         .ApplyConfiguration(new GameEntityConfiguration())
                         .ApplyConfiguration(new PlayerStatEntityConfiguration())
-                        .ApplyConfiguration(new TeamSeasonEntityConfiguration())
-                        .ApplyConfiguration(new TeamSeasonPlayerEntityConfiguration());
+                        .ApplyConfiguration(new TeamSeasonGameEntityConfiguration())
+                        .ApplyConfiguration(new StatTypeEntityConfiguration());
         }
 
         public override int SaveChanges()

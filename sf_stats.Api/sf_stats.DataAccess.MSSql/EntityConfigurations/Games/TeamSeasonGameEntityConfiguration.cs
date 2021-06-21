@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using sf_stats.Domain.Entities;
 
-namespace sf_stats.DataAccess.MSSql.EntityConfigurations.Games
+namespace sf_stats.DataAccess.MSSql.EntityConfigurations
 {
     public class TeamSeasonGameEntityConfiguration : IEntityTypeConfiguration<TeamSeasonGame>
     {
@@ -19,7 +19,7 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations.Games
                 .HasColumnType("int");
 
             builder.Property(x => x.IsHomeTeam)
-                .HasColumnType("bool");
+                .HasColumnType("bit");
 
             builder.ToTable("TeamSeasonGame");
         }
