@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace sf_stats.Domain.Entities
 {
     public class Division : DbEntity
     {
-        public int Id { get; set; }
         public string Code { get; set; }
         public string DisplayName { get; set; }
+
+        public virtual List<Season> Seasons { get; set; }
     }
 }

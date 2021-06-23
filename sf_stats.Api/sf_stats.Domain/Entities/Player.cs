@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sf_stats.Domain.Entities
 {
     public class Player : DbEntity
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -16,5 +12,7 @@ namespace sf_stats.Domain.Entities
         public int Height { get; set; }
         public int Weight { get; set; }
         public string Grade { get; set; }
+
+        public virtual List<TeamSeasonPlayer> TeamSeasonPlayers { get; set; }
     }
 }

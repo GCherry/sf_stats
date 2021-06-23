@@ -13,11 +13,15 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<DbEntity> builder)
         {
+            builder.Property(x => x.Id)
+                .UseIdentityColumn()
+                .ValueGeneratedOnAdd();
+
             builder.Property(x => x.CreatedDate)
                 .HasColumnType("datetimeoffset");
 
             builder.Property(x => x.LastModifiedDate)
-                .HasColumnType("datetimeoffset");
+                .HasColumnType("datetimeoffset"); 
         }
     }
 }
