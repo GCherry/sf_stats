@@ -53,8 +53,16 @@ namespace sf_stats.DataAccess.MSSql.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Season Update(Season season)
+        public async Task<Season> Update(Season season)
         {
+            // Check to make sure item exists first before trying to update it.
+            var seasonRecord = await _context.Seasons.FirstOrDefaultAsync(x => x.Id == season.Id);
+
+            if (seasonRecord == null)
+            {
+                return null;
+            }
+
             var item = _context.Update(season);
             return item.Entity;
         }

@@ -41,9 +41,9 @@ namespace sf_stats.Api.Services
             await _seasonRepository.SaveChangesAsync();
         }
 
-        public Season Update(Season season)
+        public async Task<Season> Update(Season season)
         {
-            return _seasonRepository.Update(season);
+            return await _seasonRepository.Update(season);
         }
     }
 }

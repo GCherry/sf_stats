@@ -4,9 +4,9 @@ using Microsoft.Extensions.Logging;
 using sf_stats.Api.Interfaces;
 using sf_stats.Domain.DomainObjects;
 using sf_stats.Domain.Dtos;
+using sf_stats.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace sf_stats.Api.Controllers
@@ -54,7 +54,6 @@ namespace sf_stats.Api.Controllers
             [FromQuery] DateTimeOffset? startDate,
             [FromQuery] DateTimeOffset? endDate)
         {
-
             var filter = new SeasonQueryFilter()
             {
                 Code = code,
@@ -65,7 +64,77 @@ namespace sf_stats.Api.Controllers
 
             var results = await _seasonService.GetAsync(filter);
 
-            return Ok(_mapper.Map<IEnumerable<LogDto>>(results));
+            return Ok(_mapper.Map<IEnumerable<SeasonDto>>(results));
+        }
+
+        /// <summary>
+        /// Return one season record by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Season record</returns>
+        [HttpGet("{id:int}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<SeasonDto>> GetSeasons(int id)
+        {
+            var results = await _seasonService.GetAsync(id);
+
+            return Ok(_mapper.Map<SeasonDto>(results));
+        }
+
+        /// <summary>
+        /// Add a new season
+        /// </summary>
+        /// <param name="season">New season</param>
+        /// <returns>Newly added season object</returns>
+        [HttpPost("add")]
+        [Produces("application/json")]
+        public async Task<ActionResult<SeasonDto>> AddSeason(SeasonDto season)
+        {
+            // Add a check to make sure the Season DTO has the proper value
+            var newSeason = _mapper.Map<Season>(season);
+
+            var results = await _seasonService.AddAsync(newSeason);
+            await _seasonService.SaveChangesAsync();
+
+            return Ok(_mapper.Map<SeasonDto>(results));
+        }
+
+        /// <summary>
+        /// Update an existing seasons data
+        /// </summary>
+        /// <param name="season"></param>
+        /// <returns>Returns the updated season data</returns>
+        [HttpPut("update")]
+        [Produces("application/json")]
+        public async Task<ActionResult<SeasonDto>> UpdateSeason(SeasonDto season)
+        {
+            var updatedSeason = _mapper.Map<Season>(season);
+
+            var results = await _seasonService.Update(updatedSeason);
+
+            if (results == null)
+            {
+                _logger.LogWarning($"Update season failed for season id {season.Id}. Season not found");
+                return NotFound();
+            }
+
+            await _seasonService.SaveChangesAsync();
+
+            return Ok(_mapper.Map<SeasonDto>(results));
+        }
+
+        /// <summary>
+        /// Delete a season
+        /// </summary>
+        /// <param name="seasonId">Id of current season to be deleted</param>
+        /// <returns>Success or Failure</returns>
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteSeason(int seasonId)
+        {
+            await _seasonService.DeleteByIdAsync(seasonId);
+            await _seasonService.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

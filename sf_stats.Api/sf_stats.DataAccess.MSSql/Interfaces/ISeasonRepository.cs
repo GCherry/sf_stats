@@ -15,6 +15,6 @@ namespace sf_stats.DataAccess.MSSql.Interfaces
         Task<List<Season>> GetAsync(SeasonQueryFilter filter);
         Task<Season> GetAsync(int seasonId);
         Task SaveChangesAsync();
-        Season Update(Season season);
+        Task<Season> Update(Season season);
     }
 }
