@@ -8,11 +8,6 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Team> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id)
-                .UseIdentityColumn()
-                .ValueGeneratedOnAdd();
-
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasColumnType("nvarchar(max)");
@@ -23,7 +18,8 @@ namespace sf_stats.DataAccess.MSSql.EntityConfigurations
 
             builder.Property(x => x.IsActive)
                 .IsRequired()
-                .HasColumnType("bit");
+                .HasColumnType("bit")
+                .HasDefaultValue(1);
 
             builder.ToTable("Team");
         }
