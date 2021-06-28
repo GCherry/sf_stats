@@ -10,6 +10,7 @@ namespace sf_stats.Api.Extensions
         {
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ILogService, LogService>();
+            services.AddTransient<ISeasonService, SeasonService>();
 
             return services;
         }

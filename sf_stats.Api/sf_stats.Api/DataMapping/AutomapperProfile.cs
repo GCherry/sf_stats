@@ -9,6 +9,7 @@ namespace sf_stats.Api.DataMapping
         public AutomapperProfile()
         {
             this.CreateMap<Log, LogDto>().ReverseMap();
+            this.CreateMap<Season, SeasonDto>().ReverseMap();
 
             // Example for mapping properties directly
             // this.CreateMap<Log, LogDto>().ReverseMap()

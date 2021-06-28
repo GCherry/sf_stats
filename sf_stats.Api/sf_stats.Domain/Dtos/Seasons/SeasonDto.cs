@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sf_stats.Domain.Dtos
 {
@@ -14,5 +10,7 @@ namespace sf_stats.Domain.Dtos
         public string DisplayName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset LastModifiedDate { get; set; }
     }
 }
