@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using sf_stats.DataAccess.MSSql.Context;
+using sf_stats.DataAccess.MSSql.Interfaces;
 using sf_stats.Domain.DomainObjects;
 using sf_stats.Domain.Entities;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class TeamRepository
+    public class TeamRepository : ITeamRepository
     {
         private readonly SFStatDbContext _context;
         public TeamRepository(SFStatDbContext context)
