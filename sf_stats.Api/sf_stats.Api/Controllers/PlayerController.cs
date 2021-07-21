@@ -56,10 +56,12 @@ namespace sf_stats.Api.Controllers
             [FromQuery] DateTime? dateOfBirth,
             [FromQuery] int? height,
             [FromQuery] int? weight,
-            [FromQuery] string grade)
+            [FromQuery] string grade,
+            [FromQuery] int? id)
         {
             var filter = new PlayerQueryFilter()
             {
+                Id = id,
                 FirstName = firstName,
                 MiddleName = middleName,
                 LastName = lastName,

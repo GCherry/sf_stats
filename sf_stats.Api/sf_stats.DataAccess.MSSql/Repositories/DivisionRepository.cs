@@ -33,6 +33,7 @@ namespace sf_stats.DataAccess.MSSql.Repositories
         public async Task<List<Division>> GetAsync(DivisionQueryFilter filter)
         {
             return await _context.Divisions
+                .Where(x => filter.Id == null || filter.Id == x.Id)
                 .Where(x => string.IsNullOrEmpty(filter.Name) || x.DisplayName.Contains(filter.Name))
                 .Where(x => string.IsNullOrEmpty(filter.Code) || x.Code.Contains(filter.Code))
                 .OrderBy(x => x.DisplayName)

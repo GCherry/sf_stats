@@ -33,6 +33,7 @@ namespace sf_stats.DataAccess.MSSql.Repositories
         public async Task<List<Player>> GetAsync(PlayerQueryFilter filter)
         {
             return await _context.Players
+                .Where(x => filter.Id == null || filter.Id == x.Id)
                 .Where(x => string.IsNullOrEmpty(filter.FirstName) || x.FirstName.Contains(filter.FirstName))
                 .Where(x => string.IsNullOrEmpty(filter.MiddleName) || x.MiddleName.Contains(filter.MiddleName))
                 .Where(x => string.IsNullOrEmpty(filter.LastName) || x.LastName.Contains(filter.LastName))

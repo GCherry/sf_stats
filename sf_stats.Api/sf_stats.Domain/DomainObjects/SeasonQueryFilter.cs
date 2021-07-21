@@ -8,6 +8,7 @@ namespace sf_stats.Domain.DomainObjects
 {
     public class SeasonQueryFilter
     {
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public DateTimeOffset? StartDate { get; set; }

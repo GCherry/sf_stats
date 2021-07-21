@@ -8,6 +8,7 @@ namespace sf_stats.Domain.DomainObjects
 {
     public class DivisionQueryFilter
     {
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
     }

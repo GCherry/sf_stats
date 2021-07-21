@@ -45,10 +45,12 @@ namespace sf_stats.Api.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<DivisionDto>>> GetDivisions(
             [FromQuery] string name,
-            [FromQuery] string code)
+            [FromQuery] string code,
+            [FromQuery] int? id)
         {
             var filter = new DivisionQueryFilter()
             {
+                Id = id,
                 Code = code,
                 Name = name
             };

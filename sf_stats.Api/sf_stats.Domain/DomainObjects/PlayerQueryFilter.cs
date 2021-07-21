@@ -8,6 +8,7 @@ namespace sf_stats.Domain.DomainObjects
 {
     public class PlayerQueryFilter
     {
+        public int? Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
