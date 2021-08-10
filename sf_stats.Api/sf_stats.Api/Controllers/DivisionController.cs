@@ -40,6 +40,7 @@ namespace sf_stats.Api.Controllers
         /// </remarks>
         /// <param name="name">Division name</param>
         /// <param name="code">Division code name</param>
+        /// <param name="id">Division id</param>
         /// <returns> Division entries based on the filter provided</returns>
         [HttpGet]
         [Produces("application/json")]
