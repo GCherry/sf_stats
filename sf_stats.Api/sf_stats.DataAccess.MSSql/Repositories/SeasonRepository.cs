@@ -36,6 +36,7 @@ namespace sf_stats.DataAccess.MSSql.Repositories
         public async Task<List<Season>> GetAsync(SeasonQueryFilter filter)
         {
             return await _context.Seasons
+                .Where(x => filter.Id == null || filter.Id == x.Id)
                 .Where(x => string.IsNullOrEmpty(filter.Name) || x.DisplayName.Contains(filter.Name))
                 .Where(x => string.IsNullOrEmpty(filter.Code) || x.Code.Contains(filter.Code))
                 .Where(CheckDates(filter.StartDate, filter.EndDate))

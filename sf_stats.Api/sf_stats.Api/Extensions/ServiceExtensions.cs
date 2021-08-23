@@ -11,6 +11,9 @@ namespace sf_stats.Api.Extensions
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ILogService, LogService>();
             services.AddTransient<ISeasonService, SeasonService>();
+            services.AddTransient<IDivisionService, DivisionService>();
+            services.AddTransient<IPlayerService, PlayerService>();
+            services.AddTransient<ITeamService, TeamService>();
 
             return services;
         }

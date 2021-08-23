@@ -52,10 +52,12 @@ namespace sf_stats.Api.Controllers
             [FromQuery] string name,
             [FromQuery] string code,
             [FromQuery] DateTimeOffset? startDate,
-            [FromQuery] DateTimeOffset? endDate)
+            [FromQuery] DateTimeOffset? endDate,
+            [FromQuery] int? id)
         {
             var filter = new SeasonQueryFilter()
             {
+                Id = id,
                 Code = code,
                 Name = name,
                 EndDate = endDate,
