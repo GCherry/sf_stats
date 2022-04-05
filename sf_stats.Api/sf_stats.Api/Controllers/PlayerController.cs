@@ -44,8 +44,14 @@ namespace sf_stats.Api.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <param name="name">Player name</param>
-        /// <param name="code">Player code name</param>
+        /// <param name="firstName"></param>
+        /// <param name="middleName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="dateOfBirth"></param>
+        /// <param name="height"></param>
+        /// <param name="weight"></param>
+        /// <param name="grade"></param>
+        /// <param name="id"></param>
         /// <returns> Player entries based on the filter provided</returns>
         [HttpGet]
         [Produces("application/json")]
