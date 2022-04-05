@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
+using sf_stats.Api.Exceptions;
 using sf_stats.Api.Interfaces;
 using sf_stats.Domain.DomainObjects;
 using sf_stats.Domain.Dtos;
 using sf_stats.Domain.Entities;
+using sf_stats.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,12 +21,14 @@ namespace sf_stats.Api.Controllers
         private readonly ILogger<LogController> _logger;
         private readonly ISeasonService _seasonService;
         private readonly IMapper _mapper;
+        private readonly IFeatureManager _featureManager;
 
-        public SeasonController(ILogger<LogController> logger, IMapper mapper, ISeasonService seasonService)
+        public SeasonController(ILogger<LogController> logger, IMapper mapper, ISeasonService seasonService, IFeatureManager featureManager)
         {
             _logger = logger;
             _mapper = mapper;
             _seasonService = seasonService;
+            _featureManager = featureManager;
         }
 
         /// <summary>
@@ -78,9 +83,16 @@ namespace sf_stats.Api.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<SeasonDto>> GetSeasons(int id)
         {
-            var results = await _seasonService.GetAsync(id);
+            if (await _featureManager.IsEnabledAsync(nameof(FeatureFlags.Seasons)))
+            {
+                var results = await _seasonService.GetAsync(id);
 
-            return Ok(_mapper.Map<SeasonDto>(results));
+                return Ok(_mapper.Map<SeasonDto>(results));
+            }
+            else
+            {
+                throw new SeasonException("The Seasons feature is disabled.");
+            }
         }
 
         /// <summary>
