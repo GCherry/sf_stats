@@ -44,8 +44,10 @@ namespace sf_stats.Api.Controllers
         ///     }
         ///
         /// </remarks>
+        /// <param name="id"></param>
         /// <param name="name">Team name</param>
-        /// <param name="code">Team code name</param>
+        /// <param name="nameAbbreviation"></param>
+        /// <param name="isActive"></param>
         /// <returns> Team entries based on the filter provided</returns>
         [HttpGet]
         [Produces("application/json")]

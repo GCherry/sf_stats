@@ -50,6 +50,7 @@ namespace sf_stats.Api.Controllers
         /// <param name="code">Team code name</param>
         /// <param name="startDate">Season start date - 2021-06-02T17:10:02.823Z</param>
         /// <param name="endDate">Season end date - 2021-06-03T17:10:02.823Z</param>
+        /// <param name="id">Season Id</param>
         /// <returns> Season entries based on the filter provided</returns>
         [HttpGet]
         [Produces("application/json")]
