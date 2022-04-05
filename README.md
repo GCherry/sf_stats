@@ -1,7 +1,7 @@
 # SF_Stats
 
 [![.NET](https://github.com/GCherry/sf_stats/actions/workflows/dotnet.yml/badge.svg)](https://github.com/GCherry/sf_stats/actions/workflows/dotnet.yml)
-
+[![CodeQL](https://github.com/GCherry/sf_stats/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/GCherry/sf_stats/actions/workflows/codeql-analysis.yml)
 ## Dev Setup
 
  
