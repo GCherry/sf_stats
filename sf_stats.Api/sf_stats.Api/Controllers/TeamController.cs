@@ -34,13 +34,10 @@ namespace sf_stats.Api.Controllers
         ///
         ///     GET /GetTeams
         ///     {
-        ///        "firstName": "Test",
-        ///        "middleName": "",
-        ///        "lastName": "Team",
-        ///        "dateOfBirth": "03-25-1986",
-        ///        "height": "48",
-        ///        "weight": "105",
-        ///        "grade": "7th",
+        ///        "id": 1,
+        ///        "name": "Test",
+        ///        "nameAbberviation: "TST",
+        ///        "isActive": true
         ///     }
         ///
         /// </remarks>
@@ -55,14 +52,14 @@ namespace sf_stats.Api.Controllers
             [FromQuery] int id,
             [FromQuery] string name,
             [FromQuery] string nameAbbreviation,
-            [FromQuery] bool isActive)
+            [FromQuery] bool? isActive)
         {
             var filter = new TeamQueryFilter()
             {
                 Id = id,
                 Name = name,
                 NameAbbreviation = nameAbbreviation,
-                IsActive = isActive
+                IsActive = isActive ?? true
             };
 
             var results = await _teamService.GetAsync(filter);

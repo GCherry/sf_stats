@@ -37,9 +37,9 @@ namespace sf_stats.DataAccess.MSSql.Repositories
                 .Where(x => string.IsNullOrEmpty(filter.FirstName) || x.FirstName.Contains(filter.FirstName))
                 .Where(x => string.IsNullOrEmpty(filter.MiddleName) || x.MiddleName.Contains(filter.MiddleName))
                 .Where(x => string.IsNullOrEmpty(filter.LastName) || x.LastName.Contains(filter.LastName))
-                .Where(x => filter.DateOfBirth != null || x.DateOfBirth == filter.DateOfBirth)
-                .Where(x => filter.Height != null  || x.Height == filter.Height)
-                .Where(x => filter.Weight != null  || x.Weight == filter.Weight)
+                .Where(x => filter.DateOfBirth == null || x.DateOfBirth == filter.DateOfBirth)
+                .Where(x => filter.Height == null  || x.Height == filter.Height)
+                .Where(x => filter.Weight == null  || x.Weight == filter.Weight)
                 .OrderBy(x => x.LastName)
                 .ToListAsync();
         }

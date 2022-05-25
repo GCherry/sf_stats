@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "921ae5a8-32f1-41a5-a587-5959ebfc2c53",
+		"name": "sf_stats_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Player",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new player\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"{{newPlayerFirstName}}\",\r\n  \"lastName\": \"{{newPlayerLastName}}\",\r\n  \"dateOfBirth\": \"{{newPlayerDob}}\",\r\n  \"height\": {{newPlayerHeight}},\r\n  \"weight\": {{newPlayerWeight}},\r\n  \"grade\": \"{{newPlayerGrade}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/Player/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Player",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Player",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"  var rs = pm.response.json()[0];\r",
+							"  pm.expect(rs.firstName).to.eql(pm.environment.get(\"newPlayerFirstName\"));\r",
+							"  pm.expect(rs.lastName).to.eql(pm.environment.get(\"newPlayerLastName\"));\r",
+							"  pm.expect( Date.parse(rs.dateOfBirth)).to.eql(Date.parse(pm.environment.get(\"newPlayerDob\")));\r",
+							"  pm.expect(rs.height).to.eql(parseInt(pm.environment.get(\"newPlayerHeight\")));\r",
+							"  pm.expect(rs.weight).to.eql(parseInt(pm.environment.get(\"newPlayerWeight\")));\r",
+							"  pm.expect(rs.grade).to.eql(pm.environment.get(\"newPlayerGrade\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/Api/Player?firstname=PostMan",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Api",
+						"Player"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "PostMan"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Team",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new team\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"{{newTeamName}}\",\r\n  \"nameAbbreviation\": \"{{newTeamNameAbbreviation}}\",\r\n  \"isActive\": {{newTeamIsActive}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/Team/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Team",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Team",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"  var rs = pm.response.json()[0];\r",
+							"  pm.expect(rs.name).to.eql(pm.environment.get(\"newTeamName\"));\r",
+							"  pm.expect(rs.nameAbbreviation).to.eql(pm.environment.get(\"newTeamNameAbbreviation\"));\r",
+							"  pm.expect(rs.isActive).to.eql(Boolean(pm.environment.get(\"newTeamIsActive\")));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/Team/?name=TeamPostman",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Team",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TeamPostman"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Division",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new division\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": \"{{newDivisonCode}}\",\r\n  \"displayName\": \"{{newDivisionDisplayName}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/Division/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Division",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Division",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"  var rs = pm.response.json()[0];\r",
+							"  pm.expect(rs.code).to.eql(pm.environment.get(\"newDivisonCode\"));\r",
+							"  pm.expect(rs.displayName).to.eql(pm.environment.get(\"newDivisionDisplayName\"));\r",
+							"  pm.environment.set(\"newDivisionId\", rs.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/Division?code={{newDivisonCode}}&name={{newDivisionDisplayName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Division"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "{{newDivisonCode}}"
+						},
+						{
+							"key": "name",
+							"value": "{{newDivisionDisplayName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Season",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new division\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"divisionId\": {{newDivisionId}},\r\n  \"code\": \"{{newSeasonCode}}\",\r\n  \"displayName\": \"{{newSeasonName}}\",\r\n  \"startDate\": \"{{newSeasonStartDate}}\",\r\n  \"endDate\": \"{{newSeasonEndDate}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/Season/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Season",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Season",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"  var rs = pm.response.json()[0];\r",
+							"  pm.expect(rs.code).to.eql(pm.environment.get(\"newSeasonCode\"));\r",
+							"  pm.expect(rs.displayName).to.eql(pm.environment.get(\"newSeasonName\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/Season?code={{newSeasonCode}}&name={{newSeasonName}}&startDate={{newSeasonStartDate}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Season"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "{{newSeasonCode}}"
+						},
+						{
+							"key": "name",
+							"value": "{{newSeasonName}}"
+						},
+						{
+							"key": "startDate",
+							"value": "{{newSeasonStartDate}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
