@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace sf_stats.Domain.DomainObjects
 {
-    public class TeamQueryFilter
+    public class TeamSeasonQueryFilter
     {
         public int? Id { get; set; }
-        public string Name { get; set; }
-        public string NameAbbreviation { get; set; }
-        public bool IsActive { get; set; } = true;
+        public int? TeamId { get; set; }
+        public int? SeasonId { get; set; }
     }
 }
