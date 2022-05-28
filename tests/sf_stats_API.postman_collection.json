@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "921ae5a8-32f1-41a5-a587-5959ebfc2c53",
+		"_postman_id": "aba1e291-8c0d-4931-b808-90d51c1df4ae",
 		"name": "sf_stats_API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20518668"
 	},
 	"item": [
 		{
@@ -149,6 +150,7 @@
 							"  pm.expect(rs.name).to.eql(pm.environment.get(\"newTeamName\"));\r",
 							"  pm.expect(rs.nameAbbreviation).to.eql(pm.environment.get(\"newTeamNameAbbreviation\"));\r",
 							"  pm.expect(rs.isActive).to.eql(Boolean(pm.environment.get(\"newTeamIsActive\")));\r",
+							"  pm.environment.set(\"newTeamId\", rs.id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -315,6 +317,7 @@
 							"  var rs = pm.response.json()[0];\r",
 							"  pm.expect(rs.code).to.eql(pm.environment.get(\"newSeasonCode\"));\r",
 							"  pm.expect(rs.displayName).to.eql(pm.environment.get(\"newSeasonName\"));\r",
+							"  pm.environment.set(\"newSeasonId\", rs.id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -345,6 +348,88 @@
 						{
 							"key": "startDate",
 							"value": "{{newSeasonStartDate}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add TeamSeason",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new division\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"teamId\": {{newTeamId}},\r\n  \"seasonId\": {{newSeasonId}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/TeamSeason/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"TeamSeason",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TeamSeason",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/TeamSeason?teamId={{newTeamId}}&seasonId={{newSeasonId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"TeamSeason"
+					],
+					"query": [
+						{
+							"key": "teamId",
+							"value": "{{newTeamId}}"
+						},
+						{
+							"key": "seasonId",
+							"value": "{{newSeasonId}}"
 						}
 					]
 				}
