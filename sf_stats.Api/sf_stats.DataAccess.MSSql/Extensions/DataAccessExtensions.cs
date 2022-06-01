@@ -19,6 +19,7 @@ namespace sf_stats.DataAccess.Extensions.MSSql
             services.AddTransient<IDivisionRepository, DivisionRepository>();
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<ITeamSeasonRepository, TeamSeasonRepository>();
 
             return services;
         }
