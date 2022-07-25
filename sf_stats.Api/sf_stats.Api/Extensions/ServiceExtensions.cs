@@ -15,6 +15,7 @@ namespace sf_stats.Api.Extensions
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<ITeamService, TeamService>();
             services.AddTransient<ITeamSeasonService, TeamSeasonService>();
+            services.AddTransient<IGameService, GameService>();
 
             return services;
         }
