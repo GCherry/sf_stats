@@ -14,6 +14,8 @@ namespace sf_stats.Api.DataMapping
             this.CreateMap<Player, PlayerDto>().ReverseMap();
             this.CreateMap<Team, TeamDto>().ReverseMap();
             this.CreateMap<TeamSeason, TeamSeasonDto>().ReverseMap();
+            this.CreateMap<Game, GameDto>().ReverseMap();
+            this.CreateMap<TeamSeasonGame, TeamSeasonGameDto>().ReverseMap();
 
             // Example for mapping properties directly
             // this.CreateMap<Log, LogDto>().ReverseMap()

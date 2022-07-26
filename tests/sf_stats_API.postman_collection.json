@@ -272,7 +272,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Can add new division\", function () {\r",
+							"pm.test(\"Can add new season\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
@@ -361,7 +361,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Can add new division\", function () {\r",
+							"pm.test(\"Can add new team season\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
@@ -404,6 +404,8 @@
 						"exec": [
 							"pm.test(\"Response property matches environment variable\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"    var rs = pm.response.json()[0];\r",
+							"    pm.environment.set(\"newTeamSeasonId\", rs.id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -430,6 +432,184 @@
 						{
 							"key": "seasonId",
 							"value": "{{newSeasonId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Game",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new game\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    var rs = pm.response.json();\r",
+							"    pm.environment.set(\"newGameId\", rs.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"gameDate\": \"{{newGameDate}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/Game/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"Game",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/Api/Game?id={{newGameId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Api",
+						"Game"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{newGameId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add TeamSeasonGame",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new team season game\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"gameId\": {{newGameId}},\r\n  \"teamSeasonId\": {{newTeamSeasonId}},\r\n  \"isHomeTeam\" : false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/TeamSeasonGame/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"TeamSeasonGame",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TeamSeasonGame",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    var rs = pm.response.json()[0];\r",
+							"    pm.environment.set(\"newTeamSeasonGameId\", rs.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/TeamSeason?gameId={{newGameId}}&teamSeasonId={{newTeamSeasonId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"TeamSeason"
+					],
+					"query": [
+						{
+							"key": "gameId",
+							"value": "{{newGameId}}"
+						},
+						{
+							"key": "teamSeasonId",
+							"value": "{{newTeamSeasonId}}"
 						}
 					]
 				}
