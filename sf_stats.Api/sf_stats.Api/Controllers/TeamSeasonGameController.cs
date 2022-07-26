@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using sf_stats.Api.Interfaces;
 using sf_stats.Domain.DomainObjects;
-using sf_stats.Domain.Dtos.Games;
+using sf_stats.Domain.Dtos;
 using sf_stats.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;

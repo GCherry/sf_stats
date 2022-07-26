@@ -1,4 +1,4 @@
-﻿namespace sf_stats.Domain.Dtos.Games
+﻿namespace sf_stats.Domain.Dtos
 {
     public class TeamSeasonGameDto
     {

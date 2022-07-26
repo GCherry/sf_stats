@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using sf_stats.Domain.Dtos;
-using sf_stats.Domain.Dtos.Games;
 using sf_stats.Domain.Entities;
 
 namespace sf_stats.Api.DataMapping
