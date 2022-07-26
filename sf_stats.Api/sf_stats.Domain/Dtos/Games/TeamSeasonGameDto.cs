@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace sf_stats.Domain.Dtos.Games
+﻿namespace sf_stats.Domain.Dtos.Games
 {
     public class TeamSeasonGameDto
     {

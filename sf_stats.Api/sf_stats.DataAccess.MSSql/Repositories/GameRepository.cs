@@ -36,6 +36,7 @@ namespace sf_stats.DataAccess.MSSql.Repositories
         public async Task<List<Game>> GetAsync(GameQueryFilter filter)
         {
             return await _context.Games
+                .Where(x => filter.Id == null || x.Id == filter.Id)
                 .Where(x => filter.GameDate == null || x.GameDate == filter.GameDate)
                 .Where(x => filter.Home_Score == null || x.Home_Score == filter.Home_Score)
                 .Where(x => filter.Away_Score == null || x.Away_Score == filter.Away_Score)

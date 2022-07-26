@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using sf_stats.Domain.Dtos;
+using sf_stats.Domain.Dtos.Games;
 using sf_stats.Domain.Entities;
 
 namespace sf_stats.Api.DataMapping
@@ -15,6 +16,7 @@ namespace sf_stats.Api.DataMapping
             this.CreateMap<Team, TeamDto>().ReverseMap();
             this.CreateMap<TeamSeason, TeamSeasonDto>().ReverseMap();
             this.CreateMap<Game, GameDto>().ReverseMap();
+            this.CreateMap<TeamSeasonGame, TeamSeasonGameDto>().ReverseMap();
 
             // Example for mapping properties directly
             // this.CreateMap<Log, LogDto>().ReverseMap()

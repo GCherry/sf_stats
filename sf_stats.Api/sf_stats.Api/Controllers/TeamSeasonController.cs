@@ -46,9 +46,9 @@ namespace sf_stats.Api.Controllers
         [HttpGet]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<TeamSeasonDto>>> GetTeamSeasons(
-            [FromQuery] int id,
-            [FromQuery] int teamId,
-            [FromQuery] int seasonId)
+            [FromQuery] int? id,
+            [FromQuery] int? teamId,
+            [FromQuery] int? seasonId)
         {
             var filter = new TeamSeasonQueryFilter()
             {
