@@ -9,30 +9,30 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class DivisionRepository : IDivisionRepository
+    public class StatTypeRepository : IStatTypeRepository
     {
         private readonly SFStatDbContext _context;
-        public DivisionRepository(SFStatDbContext context)
+        public StatTypeRepository(SFStatDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Division> AddAsync(Division Division)
+        public async Task<StatType> AddAsync(StatType StatType)
         {
-            var item = await _context.AddAsync(Division);
+            var item = await _context.AddAsync(StatType);
             return item.Entity;
         }
 
-        public async Task DeleteByIdAsync(int DivisionId)
+        public async Task DeleteByIdAsync(int StatTypeId)
         {
             // Need to decide if we want to delete or make inactive?
-            var item = await _context.Divisions.Where(x => x.Id == DivisionId).FirstOrDefaultAsync();
+            var item = await _context.StatTypes.Where(x => x.Id == StatTypeId).FirstOrDefaultAsync();
             _context.Remove(item);
         }
 
-        public async Task<List<Division>> GetAsync(DivisionQueryFilter filter)
+        public async Task<List<StatType>> GetAsync(StatTypeQueryFilter filter)
         {
-            return await _context.Divisions
+            return await _context.StatTypes
                 .Where(x => filter.Id == null || filter.Id == x.Id)
                 .Where(x => string.IsNullOrEmpty(filter.DisplayName) || x.DisplayName.Contains(filter.DisplayName))
                 .Where(x => string.IsNullOrEmpty(filter.Code) || x.Code.Contains(filter.Code))
@@ -40,9 +40,9 @@ namespace sf_stats.DataAccess.MSSql.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Division> GetAsync(int DivisionId)
+        public async Task<StatType> GetAsync(int StatTypeId)
         {
-            return await _context.Divisions.FirstOrDefaultAsync(x => x.Id == DivisionId);
+            return await _context.StatTypes.FirstOrDefaultAsync(x => x.Id == StatTypeId);
         }
 
         public async Task SaveChangesAsync()
@@ -50,17 +50,17 @@ namespace sf_stats.DataAccess.MSSql.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Division> Update(Division Division)
+        public async Task<StatType> Update(StatType StatType)
         {
             // Check to make sure item exists first before trying to update it.
-            var DivisionRecord = await _context.Divisions.FirstOrDefaultAsync(x => x.Id == Division.Id);
+            var StatTypeRecord = await _context.StatTypes.FirstOrDefaultAsync(x => x.Id == StatType.Id);
 
-            if (DivisionRecord == null)
+            if (StatTypeRecord == null)
             {
                 return null;
             }
 
-            var item = _context.Update(Division);
+            var item = _context.Update(StatType);
             return item.Entity;
         }
     }

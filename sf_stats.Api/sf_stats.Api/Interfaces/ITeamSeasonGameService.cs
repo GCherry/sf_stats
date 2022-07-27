@@ -9,7 +9,7 @@ namespace sf_stats.Api.Interfaces
 {
     public interface ITeamSeasonGameService
     {
-        Task<TeamSeasonGame> AddAsync(TeamSeasonGame TeamSeason);
+        Task<TeamSeasonGame> AddAsync(TeamSeasonGame TeamSeasonGame);
         Task DeleteByIdAsync(int TeamSeasonGameId);
         Task<List<TeamSeasonGame>> GetAsync(TeamSeasonGameQueryFilter filter);
         Task<TeamSeasonGame> GetAsync(int TeamSeasonGameId);
