@@ -12,5 +12,6 @@ PostMan Tests
   - In the left hand menu, click 'Collections'
   - Click the 'sf_stats_API' to expand the collection and see the different requests that have been configured
   - To the right of 'sf_status_API' click the 3 dots menu icon
+  - Select "Run Collection"
   - This will open a 'Runner' tab in the main window.
   - With the sf-stats solution RUNNING, click 'Run sf_stats_API' at the bottom right 
