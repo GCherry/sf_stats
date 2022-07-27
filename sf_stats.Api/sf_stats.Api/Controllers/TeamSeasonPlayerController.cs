@@ -34,24 +34,21 @@ namespace sf_stats.Api.Controllers
         ///     GET /GetTeamSeasonPlayers
         ///     {
         ///        "id": 1,
-        ///        "GameId": 1,
+        ///        "PlayerId": 1,
         ///        "TeamSeasonId": 1,
-        ///        "IsHomeTeam": True
         ///     }
         ///
         /// </remarks>
         /// <param name="id"></param>
         /// <param name="playerId">PlayerId</param>
         /// <param name="teamSeasonId">TeamSeasonId</param>
-        /// <param name="isHomeTeam">IsHomeTeam</param>
         /// <returns> TeamSeasonPlayer entries based on the filter provided</returns>
         [HttpGet]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<TeamSeasonPlayerDto>>> GetTeamSeasonPlayers(
             [FromQuery] int? id,
             [FromQuery] int? playerId,
-            [FromQuery] int? teamSeasonId,
-            [FromQuery] bool? isHomeTeam)
+            [FromQuery] int? teamSeasonId)
         {
             var filter = new TeamSeasonPlayerQueryFilter()
             {

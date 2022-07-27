@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aba1e291-8c0d-4931-b808-90d51c1df4ae",
+		"_postman_id": "40277081-899c-476d-aa53-62d67c576533",
 		"name": "sf_stats_API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20518668"
@@ -15,6 +15,8 @@
 						"exec": [
 							"pm.test(\"Can add new player\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"    var rs = pm.response.json();\r",
+							"    pm.environment.set(\"newPlayerId\", rs.id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -200,7 +202,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"code\": \"{{newDivisonCode}}\",\r\n  \"displayName\": \"{{newDivisionDisplayName}}\"\r\n}",
+					"raw": "{\r\n  \"code\": \"{{newDivisionCode}}\",\r\n  \"displayName\": \"{{newDivisionDisplayName}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -230,7 +232,7 @@
 						"exec": [
 							"pm.test(\"Response property matches environment variable\", function () {\r",
 							"  var rs = pm.response.json()[0];\r",
-							"  pm.expect(rs.code).to.eql(pm.environment.get(\"newDivisonCode\"));\r",
+							"  pm.expect(rs.code).to.eql(pm.environment.get(\"newDivisionCode\"));\r",
 							"  pm.expect(rs.displayName).to.eql(pm.environment.get(\"newDivisionDisplayName\"));\r",
 							"  pm.environment.set(\"newDivisionId\", rs.id);\r",
 							"});"
@@ -243,7 +245,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/api/Division?code={{newDivisonCode}}&name={{newDivisionDisplayName}}",
+					"raw": "{{baseUrl}}/api/Division?code={{newDivisionCode}}&displayName={{newDivisionDisplayName}}",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -254,10 +256,10 @@
 					"query": [
 						{
 							"key": "code",
-							"value": "{{newDivisonCode}}"
+							"value": "{{newDivisionCode}}"
 						},
 						{
-							"key": "name",
+							"key": "displayName",
 							"value": "{{newDivisionDisplayName}}"
 						}
 					]
@@ -610,6 +612,268 @@
 						{
 							"key": "teamSeasonId",
 							"value": "{{newTeamSeasonId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add StatType",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new stat type\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": \"{{newStatTypeCode}}\",\r\n  \"displayName\": \"{{newStatTypeDisplayName}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/StatType/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"StatType",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get StatType",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"  var rs = pm.response.json()[0];\r",
+							"  pm.expect(rs.code).to.eql(pm.environment.get(\"newStatTypeCode\"));\r",
+							"  pm.expect(rs.displayName).to.eql(pm.environment.get(\"newStatTypeDisplayName\"));\r",
+							"  pm.environment.set(\"newStatTypeId\", rs.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/StatType?code={{newStatTypeCode}}&displayName={{newStatTypeDisplayName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"StatType"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "{{newStatTypeCode}}"
+						},
+						{
+							"key": "displayName",
+							"value": "{{newStatTypeDisplayName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add TeamSeasonPlayer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new team season player\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    var rs = pm.response.json();\r",
+							"    pm.environment.set(\"newTeamSeasonPlayerId\", rs.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"playerId\": \"{{newPlayerId}}\",\r\n  \"teamSeasonId\": \"{{newTeamSeasonId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/TeamSeasonPlayer/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"TeamSeasonPlayer",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TeamSeasonPlayer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/Api/TeamSeasonPlayer?playerId={{newPlayerId}}&teamSeasonId={{newTeamSeasonId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Api",
+						"TeamSeasonPlayer"
+					],
+					"query": [
+						{
+							"key": "playerId",
+							"value": "{{newPlayerId}}"
+						},
+						{
+							"key": "teamSeasonId",
+							"value": "{{newTeamSeasonId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add PlayerStat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Can add new player stat\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"teamSeasonPlayerId\": {{newTeamSeasonPlayerId}},\r\n  \"gameId\": {{newGameId}},\r\n  \"statTypeId\": {{newStatTypeId}},\r\n  \"value\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/PlayerStat/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"PlayerStat",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get PlayerStat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response property matches environment variable\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/PlayerStat?teamSeasonPlayerId={{newTeamSeasonPlayerId}}&gameId={{newGameId}}&statTypeId={{newStatTypeId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"PlayerStat"
+					],
+					"query": [
+						{
+							"key": "teamSeasonPlayerId",
+							"value": "{{newTeamSeasonPlayerId}}"
+						},
+						{
+							"key": "gameId",
+							"value": "{{newGameId}}"
+						},
+						{
+							"key": "statTypeId",
+							"value": "{{newStatTypeId}}"
 						}
 					]
 				}
