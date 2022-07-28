@@ -8,8 +8,8 @@ namespace sf_stats.Api.Interfaces
         Task<Entity> GetAsync(int id);
         Task<Entity> AddAsync(Entity entity);
         Task SaveChangesAsync();
-        Task<Entity> Update(Entity division);
-        Task DeleteByIdAsync(int divisionId);
+        Task<Entity> Update(Entity entity);
+        Task DeleteByIdAsync(int entityId);
         Task<List<Entity>> GetAsync(Filter filter);
     }
 }
