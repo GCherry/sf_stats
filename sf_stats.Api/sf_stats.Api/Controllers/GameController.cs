@@ -13,9 +13,9 @@ namespace sf_stats.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GameController : CrudController<GameDto, Game, IGameService>
+    public class GameController : CrudController<GameDto, Game, GameQueryFilter>
     {
-        public GameController(ILogger<LogController> logger, IMapper mapper, IGameService GameService) : base(logger, mapper, GameService)
+        public GameController(ILogger<LogController> logger, IMapper mapper, ICrudService<Game, GameQueryFilter> GameService) : base(logger, mapper, GameService)
         {
         }
 

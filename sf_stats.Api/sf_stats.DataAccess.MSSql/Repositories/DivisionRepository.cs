@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class DivisionRepository : IDivisionRepository
+    public class DivisionRepository : ICrudRepository<Division, DivisionQueryFilter>
     {
         private readonly SFStatDbContext _context;
         public DivisionRepository(SFStatDbContext context)

@@ -12,9 +12,9 @@ namespace sf_stats.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DivisionController : CrudController<DivisionDto, Division, IDivisionService>
+    public class DivisionController : CrudController<DivisionDto, Division, DivisionQueryFilter>
     {
-        public DivisionController(ILogger<LogController> logger, IMapper mapper, IDivisionService divisionService) : base(logger, mapper, divisionService)
+        public DivisionController(ILogger<LogController> logger, IMapper mapper, ICrudService<Division, DivisionQueryFilter> divisionService) : base(logger, mapper, divisionService)
         {
         }
 

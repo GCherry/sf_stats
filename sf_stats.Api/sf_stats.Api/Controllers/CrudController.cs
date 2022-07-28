@@ -7,13 +7,13 @@ using sf_stats.Domain.Dtos;
 
 namespace sf_stats.Api.Controllers
 {
-    public class CrudController<Dto, Entity, Service> : ControllerBase where Dto : IDto where Service: ICrudService<Entity>
+    public class CrudController<Dto, Entity, Filter> : ControllerBase where Dto : IDto
     {
-        public Service _service;
+        public ICrudService<Entity, Filter> _service;
         public ILogger<LogController> _logger;
         public IMapper _mapper;
 
-        public CrudController(ILogger<LogController> logger, IMapper mapper, Service service)
+        public CrudController(ILogger<LogController> logger, IMapper mapper, ICrudService<Entity, Filter> service)
         {
             _service = service;
             _logger = logger;
