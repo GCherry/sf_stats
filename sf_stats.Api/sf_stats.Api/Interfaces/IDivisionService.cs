@@ -5,13 +5,8 @@ using System.Threading.Tasks;
 
 namespace sf_stats.Api.Interfaces
 {
-    public interface IDivisionService
+    public interface IDivisionService : ICrudService<Division>
     {
-        Task<Division> AddAsync(Division division);
-        Task DeleteByIdAsync(int divisionId);
         Task<List<Division>> GetAsync(DivisionQueryFilter filter);
-        Task<Division> GetAsync(int divisionId);
-        Task SaveChangesAsync();
-        Task<Division> Update(Division division);
     }
 }

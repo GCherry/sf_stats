@@ -59,6 +59,10 @@ namespace sf_stats.DataAccess.MSSql.Repositories
             {
                 return null;
             }
+            else
+            {
+                _context.Entry(DivisionRecord).State = EntityState.Detached;
+            }
 
             var item = _context.Update(Division);
             return item.Entity;
