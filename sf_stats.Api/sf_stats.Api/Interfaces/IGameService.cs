@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace sf_stats.Api.Interfaces
 {
-    public interface IGameService
+    public interface IGameService : ICrudService<Game>
     {
-        Task<Game> AddAsync(Game Game);
-        Task DeleteByIdAsync(int GameId);
         Task<List<Game>> GetAsync(GameQueryFilter filter);
-        Task<Game> GetAsync(int GameId);
-        Task SaveChangesAsync();
-        Task<Game> Update(Game Game);
     }
 }
