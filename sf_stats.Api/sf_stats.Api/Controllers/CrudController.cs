@@ -39,7 +39,7 @@ namespace sf_stats.Api.Controllers
         }
 
         /// <summary>
-        /// Return one T record by ID
+        /// Return one record by ID
         /// </summary>
         /// <param name="id"></param>
         /// <returns> record</returns>
@@ -67,7 +67,8 @@ namespace sf_stats.Api.Controllers
 
             if (results == null)
             {
-                _logger.LogWarning($"Update Division failed for Division id {dto.Id}. Division not found");
+                var typeName = typeof(Entity);
+                _logger.LogWarning($"Update {typeName} failed for {typeName} id {dto.Id}. {typeName} not found");
                 return NotFound();
             }
 
