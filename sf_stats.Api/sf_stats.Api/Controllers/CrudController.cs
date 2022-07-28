@@ -21,7 +21,7 @@ namespace sf_stats.Api.Controllers
         }
 
         /// <summary>
-        /// Add a new Division
+        /// Add a new entity
         /// </summary>
         /// <param name="dto">New Dto</param>
         /// <returns>Newly added Dto object</returns>
@@ -29,10 +29,10 @@ namespace sf_stats.Api.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<Dto>> Add(Dto dto)
         {
-            // Add a check to make sure the Division DTO has the proper value
-            var newDivision = _mapper.Map<Entity>(dto);
+            // Add a check to make sure the DTO has the proper value
+            var newEntity = _mapper.Map<Entity>(dto);
 
-            var results = await _service.AddAsync(newDivision);
+            var results = await _service.AddAsync(newEntity);
             await _service.SaveChangesAsync();
 
             return Ok(_mapper.Map<Dto>(results));
@@ -61,9 +61,9 @@ namespace sf_stats.Api.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<Dto>> Update(Dto dto)
         {
-            var updatedDivision = _mapper.Map<Entity>(dto);
+            var newEntity = _mapper.Map<Entity>(dto);
 
-            var results = await _service.Update(updatedDivision);
+            var results = await _service.Update(newEntity);
 
             if (results == null)
             {
