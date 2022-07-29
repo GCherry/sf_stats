@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.Domain.Dtos
 {
-    public class IDto
+    public interface IDto
     {
         public int Id { get; set; }
     }

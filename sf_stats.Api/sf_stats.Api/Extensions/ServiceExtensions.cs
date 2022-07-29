@@ -21,6 +21,9 @@ namespace sf_stats.Api.Extensions
             services.AddTransient<ICrudService<TeamSeason, TeamSeasonQueryFilter>, CrudService<TeamSeason, TeamSeasonQueryFilter, ICrudRepository<TeamSeason, TeamSeasonQueryFilter>>>();
             services.AddTransient<ICrudService<Game, GameQueryFilter>, CrudService<Game, GameQueryFilter, ICrudRepository<Game, GameQueryFilter>>>();
             services.AddTransient<ICrudService<TeamSeasonGame, TeamSeasonGameQueryFilter>, CrudService<TeamSeasonGame, TeamSeasonGameQueryFilter, ICrudRepository<TeamSeasonGame, TeamSeasonGameQueryFilter>>>();
+            services.AddTransient<ICrudService<TeamSeasonPlayer, TeamSeasonPlayerQueryFilter>, CrudService<TeamSeasonPlayer, TeamSeasonPlayerQueryFilter, ICrudRepository<TeamSeasonPlayer, TeamSeasonPlayerQueryFilter>>>();
+            services.AddTransient<ICrudService<PlayerStat, PlayerStatQueryFilter>, CrudService<PlayerStat, PlayerStatQueryFilter, ICrudRepository<PlayerStat, PlayerStatQueryFilter>>>();
+            services.AddTransient<ICrudService<StatType, StatTypeQueryFilter>, CrudService<StatType, StatTypeQueryFilter, ICrudRepository<StatType, StatTypeQueryFilter>>>();
 
             return services;
         }

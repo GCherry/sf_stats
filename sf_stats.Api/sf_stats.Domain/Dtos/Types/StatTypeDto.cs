@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace sf_stats.Domain.Dtos 
 {
 
-    public class StatTypeDto
+    public class StatTypeDto : IDto
     {
         public int Id { get; set; }
         public string Code { get; set; }

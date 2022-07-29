@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class StatTypeRepository : IStatTypeRepository
+    public class StatTypeRepository : ICrudRepository<StatType, StatTypeQueryFilter>
     {
         private readonly SFStatDbContext _context;
         public StatTypeRepository(SFStatDbContext context)

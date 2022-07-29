@@ -13,17 +13,12 @@ namespace sf_stats.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PlayerStatController : ControllerBase
+    public class PlayerStatController : CrudController<PlayerStatDto, PlayerStat, PlayerStatQueryFilter>
     {
-        private readonly ILogger<LogController> _logger;
-        private readonly IPlayerStatService _PlayerStatService;
-        private readonly IMapper _mapper;
 
-        public PlayerStatController(ILogger<LogController> logger, IMapper mapper, IPlayerStatService PlayerStatService)
+
+        public PlayerStatController(ILogger<LogController> logger, IMapper mapper, ICrudService<PlayerStat, PlayerStatQueryFilter> PlayerStatService) : base (logger, mapper, PlayerStatService)
         {
-            _logger = logger;
-            _mapper = mapper;
-            _PlayerStatService = PlayerStatService;
         }
 
         /// <summary>
@@ -62,79 +57,9 @@ namespace sf_stats.Api.Controllers
                 Value = value
             };
 
-            var results = await _PlayerStatService.GetAsync(filter);
+            var results = await _service.GetAsync(filter);
 
             return Ok(_mapper.Map<IEnumerable<PlayerStatDto>>(results));
-        }
-
-        /// <summary>
-        /// Return one PlayerStat record by ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>PlayerStat record</returns>
-        [HttpGet("{id:int}")]
-        [Produces("application/json")]
-        public async Task<ActionResult<PlayerStatDto>> GetPlayerStats(int id)
-        {
-            var results = await _PlayerStatService.GetAsync(id);
-
-            return Ok(_mapper.Map<PlayerStatDto>(results));
-        }
-
-        /// <summary>
-        /// Add a new PlayerStat
-        /// </summary>
-        /// <param name="PlayerStat">New PlayerStat</param>
-        /// <returns>Newly added PlayerStat object</returns>
-        [HttpPost("add")]
-        [Produces("application/json")]
-        public async Task<ActionResult<PlayerStatDto>> AddPlayerStat(PlayerStatDto PlayerStat)
-        {
-            // Add a check to make sure the PlayerStat DTO has the proper value
-            var newPlayerStat = _mapper.Map<PlayerStat>(PlayerStat);
-
-            var results = await _PlayerStatService.AddAsync(newPlayerStat);
-            await _PlayerStatService.SaveChangesAsync();
-
-            return Ok(_mapper.Map<PlayerStatDto>(results));
-        }
-
-        /// <summary>
-        /// Update an existing PlayerStats data
-        /// </summary>
-        /// <param name="PlayerStat"></param>
-        /// <returns>Returns the updated PlayerStat data</returns>
-        [HttpPut("update")]
-        [Produces("application/json")]
-        public async Task<ActionResult<PlayerStatDto>> UpdatePlayerStat(PlayerStatDto PlayerStat)
-        {
-            var updatedPlayerStat = _mapper.Map<PlayerStat>(PlayerStat);
-
-            var results = await _PlayerStatService.Update(updatedPlayerStat);
-
-            if (results == null)
-            {
-                _logger.LogWarning($"Update PlayerStat failed for PlayerStat id {PlayerStat.Id}. PlayerStat not found");
-                return NotFound();
-            }
-
-            await _PlayerStatService.SaveChangesAsync();
-
-            return Ok(_mapper.Map<PlayerStatDto>(results));
-        }
-
-        /// <summary>
-        /// Delete a PlayerStat
-        /// </summary>
-        /// <param name="PlayerStatId">Id of current PlayerStat to be deleted</param>
-        /// <returns>Success or Failure</returns>
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeletePlayerStat(int PlayerStatId)
-        {
-            await _PlayerStatService.DeleteByIdAsync(PlayerStatId);
-            await _PlayerStatService.SaveChangesAsync();
-
-            return Ok();
         }
     }
 }

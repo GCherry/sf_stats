@@ -24,6 +24,9 @@ namespace sf_stats.DataAccess.Extensions.MSSql
             services.AddTransient<ICrudRepository<TeamSeason, TeamSeasonQueryFilter>, TeamSeasonRepository>();
             services.AddTransient<ICrudRepository<Game, GameQueryFilter>, GameRepository>();
             services.AddTransient<ICrudRepository<TeamSeasonGame, TeamSeasonGameQueryFilter>, TeamSeasonGameRepository>();
+            services.AddTransient<ICrudRepository<TeamSeasonPlayer, TeamSeasonPlayerQueryFilter>, TeamSeasonPlayerRepository>();
+            services.AddTransient<ICrudRepository<StatType, StatTypeQueryFilter>, StatTypeRepository>();
+            services.AddTransient<ICrudRepository<PlayerStat, PlayerStatQueryFilter>, PlayerStatRepository>();
 
             return services;
         }
