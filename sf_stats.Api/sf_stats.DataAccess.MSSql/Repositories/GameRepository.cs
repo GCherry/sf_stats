@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class GameRepository : IGameRepository
+    public class GameRepository : ICrudRepository<Game, GameQueryFilter>
     {
         private readonly SFStatDbContext _context;
         public GameRepository(SFStatDbContext context)

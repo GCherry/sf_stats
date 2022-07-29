@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class DivisionRepository : IDivisionRepository
+    public class DivisionRepository : ICrudRepository<Division, DivisionQueryFilter>
     {
         private readonly SFStatDbContext _context;
         public DivisionRepository(SFStatDbContext context)
@@ -58,6 +58,10 @@ namespace sf_stats.DataAccess.MSSql.Repositories
             if (DivisionRecord == null)
             {
                 return null;
+            }
+            else
+            {
+                _context.Entry(DivisionRecord).State = EntityState.Detached;
             }
 
             var item = _context.Update(Division);

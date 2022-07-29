@@ -13,17 +13,10 @@ namespace sf_stats.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GameController : ControllerBase
+    public class GameController : CrudController<GameDto, Game, GameQueryFilter>
     {
-        private readonly ILogger<LogController> _logger;
-        private readonly IGameService _GameService;
-        private readonly IMapper _mapper;
-
-        public GameController(ILogger<LogController> logger, IMapper mapper, IGameService GameService)
+        public GameController(ILogger<LogController> logger, IMapper mapper, ICrudService<Game, GameQueryFilter> GameService) : base(logger, mapper, GameService)
         {
-            _logger = logger;
-            _mapper = mapper;
-            _GameService = GameService;
         }
 
         /// <summary>
@@ -62,79 +55,9 @@ namespace sf_stats.Api.Controllers
                 Away_Score = away_Score
             };
 
-            var results = await _GameService.GetAsync(filter);
+            var results = await _service.GetAsync(filter);
 
             return Ok(_mapper.Map<IEnumerable<GameDto>>(results));
-        }
-
-        /// <summary>
-        /// Return one Game record by ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Game record</returns>
-        [HttpGet("{id:int}")]
-        [Produces("application/json")]
-        public async Task<ActionResult<GameDto>> GetGames(int id)
-        {
-            var results = await _GameService.GetAsync(id);
-
-            return Ok(_mapper.Map<GameDto>(results));
-        }
-
-        /// <summary>
-        /// Add a new Game
-        /// </summary>
-        /// <param name="Game">New Game</param>
-        /// <returns>Newly added Game object</returns>
-        [HttpPost("add")]
-        [Produces("application/json")]
-        public async Task<ActionResult<GameDto>> AddGame(GameDto Game)
-        {
-            // Add a check to make sure the Game DTO has the proper value
-            var newGame = _mapper.Map<Game>(Game);
-
-            var results = await _GameService.AddAsync(newGame);
-            await _GameService.SaveChangesAsync();
-
-            return Ok(_mapper.Map<GameDto>(results));
-        }
-
-        /// <summary>
-        /// Update an existing Games data
-        /// </summary>
-        /// <param name="Game"></param>
-        /// <returns>Returns the updated Game data</returns>
-        [HttpPut("update")]
-        [Produces("application/json")]
-        public async Task<ActionResult<GameDto>> UpdateGame(GameDto Game)
-        {
-            var updatedGame = _mapper.Map<Game>(Game);
-
-            var results = await _GameService.Update(updatedGame);
-
-            if (results == null)
-            {
-                _logger.LogWarning($"Update Game failed for Game id {Game.Id}. Game not found");
-                return NotFound();
-            }
-
-            await _GameService.SaveChangesAsync();
-
-            return Ok(_mapper.Map<GameDto>(results));
-        }
-
-        /// <summary>
-        /// Delete a Game
-        /// </summary>
-        /// <param name="GameId">Id of current Game to be deleted</param>
-        /// <returns>Success or Failure</returns>
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteGame(int GameId)
-        {
-            await _GameService.DeleteByIdAsync(GameId);
-            await _GameService.SaveChangesAsync();
-
-            return Ok();
         }
     }
 }

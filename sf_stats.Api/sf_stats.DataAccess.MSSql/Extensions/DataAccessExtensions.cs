@@ -4,6 +4,8 @@ using sf_stats.DataAccess.MSSql.Context;
 using Microsoft.EntityFrameworkCore;
 using sf_stats.DataAccess.MSSql.Repositories;
 using sf_stats.DataAccess.MSSql.Interfaces;
+using sf_stats.Domain.Entities;
+using sf_stats.Domain.DomainObjects;
 
 namespace sf_stats.DataAccess.Extensions.MSSql
 {
@@ -15,13 +17,13 @@ namespace sf_stats.DataAccess.Extensions.MSSql
 
             // Repositories
             services.AddTransient<ILogRepository, LogRepository>();
-            services.AddTransient<ISeasonRepository, SeasonRepository>();
-            services.AddTransient<IDivisionRepository, DivisionRepository>();
-            services.AddTransient<IPlayerRepository, PlayerRepository>();
-            services.AddTransient<ITeamRepository, TeamRepository>();
-            services.AddTransient<ITeamSeasonRepository, TeamSeasonRepository>();
-            services.AddTransient<IGameRepository, GameRepository>();
-            services.AddTransient<ITeamSeasonGameRepository, TeamSeasonGameRepository>();
+            services.AddTransient<ICrudRepository<Season, SeasonQueryFilter>, SeasonRepository>();
+            services.AddTransient<ICrudRepository<Division, DivisionQueryFilter>, DivisionRepository>();
+            services.AddTransient<ICrudRepository<Player, PlayerQueryFilter>, PlayerRepository>();
+            services.AddTransient<ICrudRepository<Team, TeamQueryFilter>, TeamRepository>();
+            services.AddTransient<ICrudRepository<TeamSeason, TeamSeasonQueryFilter>, TeamSeasonRepository>();
+            services.AddTransient<ICrudRepository<Game, GameQueryFilter>, GameRepository>();
+            services.AddTransient<ICrudRepository<TeamSeasonGame, TeamSeasonGameQueryFilter>, TeamSeasonGameRepository>();
 
             return services;
         }

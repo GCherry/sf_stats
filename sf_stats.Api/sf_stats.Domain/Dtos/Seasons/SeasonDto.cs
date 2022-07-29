@@ -2,9 +2,8 @@
 
 namespace sf_stats.Domain.Dtos
 {
-    public class SeasonDto
+    public class SeasonDto : IDto
     {
-        public int Id { get; set; }
         public int DivisionId { get; set; }
         public string Code { get; set; }
         public string DisplayName { get; set; }
