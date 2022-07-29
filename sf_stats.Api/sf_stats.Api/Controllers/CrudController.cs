@@ -7,13 +7,13 @@ using sf_stats.Domain.Dtos;
 
 namespace sf_stats.Api.Controllers
 {
-    public class CrudController<Dto, Entity, Filter> : ControllerBase where Dto : IDto
+    public class CrudController<TIDto, TEntity, TFilter> : ControllerBase
     {
-        public ICrudService<Entity, Filter> _service;
+        public ICrudService<TEntity, TFilter> _service;
         public ILogger<LogController> _logger;
         public IMapper _mapper;
 
-        public CrudController(ILogger<LogController> logger, IMapper mapper, ICrudService<Entity, Filter> service)
+        public CrudController(ILogger<LogController> logger, IMapper mapper, ICrudService<TEntity, TFilter> service)
         {
             _service = service;
             _logger = logger;
@@ -21,21 +21,21 @@ namespace sf_stats.Api.Controllers
         }
 
         /// <summary>
-        /// Add a new entity
+        /// Add a new TEntity
         /// </summary>
-        /// <param name="dto">New Dto</param>
-        /// <returns>Newly added Dto object</returns>
+        /// <param name="dto">New TEntity</param>
+        /// <returns>Newly added TEntity object</returns>
         [HttpPost("add")]
         [Produces("application/json")]
-        public async Task<ActionResult<Dto>> Add(Dto dto)
+        public async Task<ActionResult<TIDto>> Add(TIDto dto)
         {
             // Add a check to make sure the DTO has the proper value
-            var newEntity = _mapper.Map<Entity>(dto);
+            var newTEntity = _mapper.Map<TEntity>(dto);
 
-            var results = await _service.AddAsync(newEntity);
+            var results = await _service.AddAsync(newTEntity);
             await _service.SaveChangesAsync();
 
-            return Ok(_mapper.Map<Dto>(results));
+            return Ok(_mapper.Map<TIDto>(results));
         }
 
         /// <summary>
@@ -45,11 +45,11 @@ namespace sf_stats.Api.Controllers
         /// <returns> record</returns>
         [HttpGet("{id:int}")]
         [Produces("application/json")]
-        public async Task<ActionResult<Entity>> GetById(int id)
+        public async Task<ActionResult<TEntity>> GetById(int id)
         {
             var results = await _service.GetAsync(id);
 
-            return Ok(_mapper.Map<Entity>(results));
+            return Ok(_mapper.Map<TEntity>(results));
         }
 
         /// <summary>
@@ -59,28 +59,28 @@ namespace sf_stats.Api.Controllers
         /// <returns>Returns the updated dto data</returns>
         [HttpPut("update")]
         [Produces("application/json")]
-        public async Task<ActionResult<Dto>> Update(Dto dto)
+        public async Task<ActionResult<TIDto>> Update(TIDto dto)
         {
-            var newEntity = _mapper.Map<Entity>(dto);
+            var newTEntity = _mapper.Map<TEntity>(dto);
 
-            var results = await _service.Update(newEntity);
+            var results = await _service.Update(newTEntity);
 
             if (results == null)
             {
-                var typeName = typeof(Entity);
+                var typeName = typeof(TEntity);
                 _logger.LogWarning($"Update {typeName} failed for {typeName} id {dto.Id}. {typeName} not found");
                 return NotFound();
             }
 
             await _service.SaveChangesAsync();
 
-            return Ok(_mapper.Map<Dto>(results));
+            return Ok(_mapper.Map<TIDto>(results));
         }
 
         /// <summary>
-        /// Delete a Division
+        /// Delete a TEntity
         /// </summary>
-        /// <param name="id">Id of current Entity to be deleted</param>
+        /// <param name="id">Id of current TEntity to be deleted</param>
         /// <returns>Success or Failure</returns>
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)

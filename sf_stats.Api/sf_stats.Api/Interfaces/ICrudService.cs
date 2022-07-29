@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 namespace sf_stats.Api.Interfaces
 {
-    public interface ICrudService<Entity, Filter>
+    public interface ICrudService<TEntity, TFilter>
     {
-        Task<Entity> GetAsync(int id);
-        Task<Entity> AddAsync(Entity entity);
+        Task<TEntity> GetAsync(int id);
+        Task<TEntity> AddAsync(TEntity TEntity);
         Task SaveChangesAsync();
-        Task<Entity> Update(Entity entity);
-        Task DeleteByIdAsync(int entityId);
-        Task<List<Entity>> GetAsync(Filter filter);
+        Task<TEntity> Update(TEntity TEntity);
+        Task DeleteByIdAsync(int TEntityId);
+        Task<List<TEntity>> GetAsync(TFilter TFilter);
     }
 }

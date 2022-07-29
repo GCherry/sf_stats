@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Interfaces
 {
-    public interface ICrudRepository<Entity, Filter>
+    public interface ICrudRepository<TEntity, TFilter>
     {
-        Task<Entity> AddAsync(Entity Division);
-        Task DeleteByIdAsync(int DivisionId);
-        Task<List<Entity>> GetAsync(Filter filter);
-        Task<Entity> GetAsync(int DivisionId);
+        Task<TEntity> AddAsync(TEntity TEntity);
+        Task DeleteByIdAsync(int Id);
+        Task<List<TEntity>> GetAsync(TFilter TFilter);
+        Task<TEntity> GetAsync(int Id);
         Task SaveChangesAsync();
-        Task<Entity> Update(Entity Division);
+        Task<TEntity> Update(TEntity TEntity);
     }
 }
