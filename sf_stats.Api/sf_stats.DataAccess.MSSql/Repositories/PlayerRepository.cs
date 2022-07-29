@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class PlayerRepository : IPlayerRepository
+    public class PlayerRepository : ICrudRepository<Player, PlayerQueryFilter>
     {
         private readonly SFStatDbContext _context;
         public PlayerRepository(SFStatDbContext context)

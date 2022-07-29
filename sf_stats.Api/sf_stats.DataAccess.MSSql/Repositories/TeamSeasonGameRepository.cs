@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace sf_stats.DataAccess.MSSql.Repositories
 {
-    public class TeamSeasonGameRepository : ITeamSeasonGameRepository
+    public class TeamSeasonGameRepository : ICrudRepository<TeamSeasonGame, TeamSeasonGameQueryFilter>
     {
         private readonly SFStatDbContext _context;
         public TeamSeasonGameRepository(SFStatDbContext context)
