@@ -7,7 +7,7 @@ using sf_stats.Domain.Dtos;
 
 namespace sf_stats.Api.Controllers
 {
-    public class CrudController<TIDto, TEntity, TFilter> : ControllerBase
+    public class CrudController<TDto, TEntity, TFilter> : ControllerBase where TDto : IDto
     {
         public ICrudService<TEntity, TFilter> _service;
         public ILogger<LogController> _logger;
@@ -27,7 +27,7 @@ namespace sf_stats.Api.Controllers
         /// <returns>Newly added TEntity object</returns>
         [HttpPost("add")]
         [Produces("application/json")]
-        public async Task<ActionResult<TIDto>> Add(TIDto dto)
+        public async Task<ActionResult<TDto>> Add(TDto dto)
         {
             // Add a check to make sure the DTO has the proper value
             var newTEntity = _mapper.Map<TEntity>(dto);
@@ -35,7 +35,7 @@ namespace sf_stats.Api.Controllers
             var results = await _service.AddAsync(newTEntity);
             await _service.SaveChangesAsync();
 
-            return Ok(_mapper.Map<TIDto>(results));
+            return Ok(_mapper.Map<TDto>(results));
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace sf_stats.Api.Controllers
         /// <returns>Returns the updated dto data</returns>
         [HttpPut("update")]
         [Produces("application/json")]
-        public async Task<ActionResult<TIDto>> Update(TIDto dto)
+        public async Task<ActionResult<TDto>> Update(TDto dto)
         {
             var newTEntity = _mapper.Map<TEntity>(dto);
 
@@ -74,7 +74,7 @@ namespace sf_stats.Api.Controllers
 
             await _service.SaveChangesAsync();
 
-            return Ok(_mapper.Map<TIDto>(results));
+            return Ok(_mapper.Map<TDto>(results));
         }
 
         /// <summary>
