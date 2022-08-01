@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sf_stats.Domain.Dtos 
+namespace sf_stats.Domain.DomainObjects
 {
-
-    public class StatTypeDto : IDto
+    public class StatTypeQueryFilter
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Code { get; set; }
         public string DisplayName { get; set; }
     }

@@ -26,19 +26,19 @@ namespace sf_stats.Api.Controllers
         ///
         ///     GET /GetDivisions
         ///     {
-        ///        "name": "Test Division",
+        ///        "displayName": "Test Division",
         ///        "code": "TTD"
         ///     }
         ///
         /// </remarks>
-        /// <param name="name">Division name</param>
+        /// <param name="displayName">Division display name</param>
         /// <param name="code">Division code name</param>
         /// <param name="id">Division id</param>
         /// <returns> Division entries based on the filter provided</returns>
         [HttpGet]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<DivisionDto>>> GetDivisions(
-            [FromQuery] string name,
+            [FromQuery] string displayName,
             [FromQuery] string code,
             [FromQuery] int? id)
         {
@@ -46,7 +46,7 @@ namespace sf_stats.Api.Controllers
             {
                 Id = id,
                 Code = code,
-                Name = name
+                DisplayName = displayName
             };
 
             var results = await _service.GetAsync(filter);
